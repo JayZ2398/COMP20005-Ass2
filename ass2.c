@@ -78,7 +78,7 @@ void initialise_tree(Tree *tree) {
 }
 
 void print_tree_data(Tree *tree) {
-	printf("==== Tree at %p (%I64d bytes)\n", tree, sizeof(Tree));
+	printf("==== Tree at %p\n", tree, sizeof(Tree));
 	printf("tree->label  = %c\n", tree->label);
 	printf("tree->xloc   = %f\n", tree->xloc);
 	printf("tree->yloc   = %f\n", tree->yloc);
