@@ -4,6 +4,7 @@ Assignment 2
 Jack Zezula
 04/05/2018 - ????
 */
+// programming is fun
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -17,8 +18,7 @@ Jack Zezula
 typedef struct {
 	// Stage 1 vars
 	char label;
-	double xloc, yloc, radius;
-	int litres;
+	double xloc, yloc, litres, radius;
 
 	// Stage 2
 	int num_conflicts;
@@ -31,40 +31,34 @@ typedef struct {
 
 typedef Tree Forest[MAX_TREES];
 
-typedef struct {
-	int num_trees, total_water;
-	Forest forest;
-} Data;
-
 // Tree functions
 void initialise_tree(Tree *tree);
 void print_tree_data(Tree *tree);
-void find_conflicting_trees(Data *data);
+void find_conflicting_trees(Forest forest, int num_trees);
 double distance_between_trees(Tree *tree, Tree *other);
 
 // Input handlers
-void read_data(Data *data);
+void read_data(Forest forest, int *num_trees, double *total_water);
 void remove_headers();
 int mygetchar();
 
 // Output functions
-void stage1_output(Data *data);
-void stage2_output(Data *data);
+void stage1_output(Forest forest, int num_trees, int total_water);
+void stage2_output(Forest forest, int num_trees);
 
 int
 main(int argc, char *argv[]) {
 	// Initialise data
-	Data data = {
-		.num_trees = 0,
-		.total_water = 0,
-	};
+	Forest forest;
+	int num_trees = 0;
+	double total_water = 0;
 
 	remove_headers();
-	read_data(&data);
-	stage1_output(&data);
+	read_data(forest, &num_trees, &total_water);
+	stage1_output(forest, num_trees, total_water);
 
-	find_conflicting_trees(&data);
-	stage2_output(&data);
+	find_conflicting_trees(forest, num_trees);
+	stage2_output(forest, num_trees);
 
 	return 0;
 }
@@ -78,28 +72,26 @@ void initialise_tree(Tree *tree) {
 }
 
 void print_tree_data(Tree *tree) {
-	printf("==== Tree at %p\n", tree, sizeof(Tree));
+	printf("==== Tree at %p (%d bytes)\n", tree, sizeof(*tree));
 	printf("tree->label  = %c\n", tree->label);
 	printf("tree->xloc   = %f\n", tree->xloc);
 	printf("tree->yloc   = %f\n", tree->yloc);
-	printf("tree->litres = %d\n", tree->litres);
+	printf("tree->litres = %f\n", tree->litres);
 	printf("tree->radius = %f\n\n", tree->radius);
 }
 
-void find_conflicting_trees(Data *data) {
-	int processed, compared, num_trees = data->num_trees;
+void find_conflicting_trees(Forest forest, int num_trees) {
+	int processed, compared;
 	double distance, tree_rad, other_rad;
 
-	// Declare pointer to first tree in forest
-	Tree *tree, *other;
-	tree = data->forest;
-	other = NULL;
+	// Declare pointers to trees in forest
+	Tree *tree = forest, *other;
 
 	// Iterate through trees in forest to find conflicts for each
 	for (processed = 0; processed < num_trees; processed++, tree++) {
 		// Set comparison tree, iterate through other trees
-		other = data->forest;
-		for (compared = 0; compared < num_trees - 1; compared++, other++) {
+		for (compared = 0; compared < num_trees; compared++, other++) {
+			other = &forest[compared];
 			// If other tree is the same, skip to next tree
 			if (tree->label == other->label) {
 				continue;
@@ -114,7 +106,6 @@ void find_conflicting_trees(Data *data) {
 			}
 		}
 	}
-
 }
 
 double distance_between_trees(Tree* tree, Tree* other) {
@@ -129,24 +120,26 @@ double distance_between_trees(Tree* tree, Tree* other) {
 }
 
 // Output functions
-void stage1_output(Data *data) {
-	double megalitres = (double) (data->total_water) / 1e6;
-	printf("S1: total data lines   = %5d trees\n", data->num_trees);
+void stage1_output(Forest forest, int num_trees, int total_water) {
+	double megalitres = (double) (total_water) / 1e6;
+	printf("S1: total data lines   = %5d trees\n", num_trees);
 	printf("S1: total water needed = %5.3f megalitres\n\n", megalitres);
 }
 
-void stage2_output(Data *data) {
-	int processed, con_tree, conflicts, num_trees = data->num_trees;
+void stage2_output(Forest forest, int num_trees) {
+	// Counter variable and pointer declaration
+	int processed, conf_tree, conflicts;
 	Tree *tree;
-	tree = data->forest;
 
 	// Process all trees stored in data
 	for (processed = 0; processed < num_trees; tree++, processed++) {
+		// Use pointer to tree for easy assignment of tree properties
+		tree = &forest[processed];
 		// Print all labels stored in tree's array of conflicts
 		conflicts = tree->num_conflicts;
 		printf("S2: tree %c is in conflict with ", tree->label);
-		for(con_tree = 0; con_tree < conflicts; con_tree++) {
-			printf("%c ", tree->conflicts[con_tree]);
+		for(conf_tree = 0; conf_tree < conflicts; conf_tree++) {
+			printf("%c ", tree->conflicts[conf_tree]);
 		}
 		printf("\n");
 	}
@@ -154,18 +147,16 @@ void stage2_output(Data *data) {
 }
 
 // Input handlers
-void read_data(Data *data) {
+void read_data(Forest forest, int *num_trees, double *total_water) {
 	// Input variables for table data
 	char label;
-	double xloc, yloc, rootrad;
-	int litres;
+	double xloc, yloc, litres, rootrad;
 
-	// Declare pointer to first tree in forest
-	Tree* tree;
-	tree = data->forest;
-
-	while (scanf("%c%lf%lf%d%lf\n",
+	// Use pointer to tree for easier assigment of properties during input read
+	Tree *tree = forest;
+	while (scanf(" %c %lf %lf %lf %lf\n",
 				 &label, &xloc, &yloc, &litres, &rootrad) == 5) {
+
 					// Read input info into tree structure
 					tree->label = label;
 					tree->xloc = xloc;
@@ -177,9 +168,9 @@ void read_data(Data *data) {
 					// Assign all other tree attributes to their defaults
 					initialise_tree(tree);
 
-					// Update data info about entire forest, and point to next tree
-					data->total_water += litres;
-					data->num_trees++;
+					// Update total water and tree count, and point to next tree
+					*total_water += litres;
+					*num_trees += 1;
 					tree++;
 	 }
  }

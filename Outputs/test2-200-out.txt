@@ -1,6 +1,6 @@
 
 S1: total data lines   =    13 trees
-S1: total water needed = 3.760 megaliters per year
+S1: total water needed = 0.376 megaliters per year
 
 S2: tree A is in conflict with d
 S2: tree B is in conflict with e
@@ -51,43 +51,37 @@ S3:     +---------+---------+---------+---------+---------+---------+---------+
 S3:     0        10        20        30        40        50        60        70
 
 
-S4: rainfall amount = 120.0
-S4: tree m has stress factor 2.22 and dies next
-S4: tree F has stress factor 1.98 and dies next
-S4: tree e has stress factor 1.58 and dies next
-S4: tree P has stress factor 1.39 and dies next
-S4: tree H has stress factor 1.35 and dies next
-S4: tree K has stress factor 1.28 and dies next
-S4: tree z has stress factor 1.05 and dies next
-S4: tree s has stress factor 1.03 and dies next
+S4: rainfall amount = 200.0
+S4: tree m has stress factor 1.33 and dies next
+S4: tree F has stress factor 1.19 and dies next
 
 S4: 60 +
 S4:    |
 S4:    |                                             BB
-S4:    |                                         BBBBBBBBBB
-S4:    |                                        BBBBBBBBBBBB
-S4: 50 +                                       BBBBBBBBBBBBBB
-S4:    |                                       BBBBBBBBBBBBBB
-S4:    |                                        BBBBBBBBBBBB
-S4:    |                                         BBBBBBBBB
-S4:    |                              TTTTTTTTTT
-S4: 40 +                          TTTTTTTTTTTTTTTTTT
-S4:    |                        TTTTTTTTTTTTTTTTTTTTTT
-S4:    |                      TTTTTTTTTTTTTTTTTTTTTTTTTT
+S4:    |          zzz       HHHHHHHHHHH          BBBBBBBBBB
+S4:    |     zzzzzzzzzzzz HHHHHHHHHHHHHHH       BBBBBBBBBBBB
+S4: 50 +   zzzzzzzzzzzzzzzHHHHHHHHHHHHHHHH     BBBBBBBBBBBBBB
+S4:    |  zzzzzzzzzzzzzzzzHHHHHHHHHHHHHHHHH eeeeBBBBBBBBBBBBB
+S4:    |  zzzzzzzzzzzzzzzzHHHHHHHHHHHHHHHeeeeeeeeeBBBBBBBBBB
+S4:    | zzzzzzzzzzzzzzzzzzHHHHHHHHHHHHHeeeeeeeeeeeeBBBBBB
+S4:    |  zzzzzzzzzzzzzzzzzHHHHHHHHHHHHHeeeeeeeeeeeeee
+S4: 40 +  zzzzzzzzzzzzzzzzzHHHHHHHHHHHHHeeeeeeeeeeeeee
+S4:    |    zzzzzzzzzzzzzzz   HHHHHHHTTTTeeeeeeeeeeeeT
+S4:    |      zzzzzzzzzzz     TTTTTTTTTTTTeeeeeeeeeTTTTT
 S4:    |                     TTTTTTTTTTTTTTTTTTTTTTTTTTTT
-S4:    |          dddddddddddTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
-S4: 30 +       ddddddddddddddddTTTTTTTTTTTTTTTTTTTTTTTTTTT
-S4:    |     dddddddddddddddddddTTTTTTTTTTTTTTTTTTTTTTTTTTT
-S4:    |    dddddddddddddddddddddTTTTTTTTTTTTTTTTTTTTTTTTTT
-S4:    |    dddddddddddddddddddddTTTTTTTTTTTTTTTTTTTTTTTTT
-S4:    |    ddddddddddddddddddddddTTTTTTTTTTTTTTTTyyyyyyTT
-S4: 20 +    ddddddddddddddddddddddTTTTTTTTTTTTTyyyyyyyyyyyy
-S4:    |    ddAAAAAAAdddddddddddddTTTTTTTTTTTTyyyyyyyyyyyyyyy
-S4:    |     AAAAAAAAAAAdddddddddTTTTTTTTTTTTyyyyyyyyyyyyyyyyy
-S4:    |     AAAAAAAAAAAdddddddd   TTTTTTTTTTyyyyyyyyyyyyyyyyy
-S4:    |     AAAAAAAAAAAdddddd           TTTTyyyyyyyyyyyyyyyyy
-S4: 10 +      AAAAAAAAddd                    yyyyyyyyyyyyyyyy
-S4:    |                                       yyyyyyyyyyyyy
+S4:    |          dddddddddddTTTTTTTTTTTTTTTTTTTTTTTTTTTTT    sss
+S4: 30 +       ddddddddddddddddTTTTTTTTTTTTTTTTTTTTTTTTTssssssssssssss
+S4:    |     dddddddddddddddddddTTTTTTTTTTTTTTTTTTTTTTTssssssssssssssssss
+S4:    |    dddddddddddddddddddddTTTTTTTTTTTTTTTTTTTTTssssssssssssssssssss
+S4:    |    ddddddddddddddddddddPPPPTTTTTTTTTTTTTTTTTssssssssssssssssssssss
+S4:    |    ddddddddddddddddddPPPPPPPPTTTTTTTTTTTTyyyyysssssssssssssssssssss
+S4: 20 +    dddddddddddddddddPPPPPPPPPPPPTTTTTTyyyyyyyyyssssssssssssssssssss
+S4:    |    ddAAAAAAAdddddddPPPPPPPPPPPPPPTTTTyyyyyyyyyyyssssssssssKKsssssss
+S4:    |     AAAAAAAAAAAdddPPPPPPPPPPPPPPPTTTyyyyyyyyyyyyyyssssssKKKKKKKssss
+S4:    |     AAAAAAAAAAAdddPPPPPPPPPPPPPPPTTTyyyyyyyyyyyyyyyssssKKKKKKKKsss
+S4:    |     AAAAAAAAAAAdddPPPPPPPPPPPPPPTTTTyyyyyyyyyyyyyyyyssssKKKKKKKss
+S4: 10 +      AAAAAAAAddd    PPPPPPPPPPP     yyyyyyyyyyyyyyyyssssssKKsss
+S4:    |                                       yyyyyyyyyyyyysssssssss
 S4:    |                                         yyyyyyyy
 S4:    |
 S4:    |

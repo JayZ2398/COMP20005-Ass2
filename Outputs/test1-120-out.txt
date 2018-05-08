@@ -1,6 +1,6 @@
 
 S1: total data lines   =     5 trees
-S1: total water needed = 1.133 megaliters per year
+S1: total water needed = 0.113 megaliters per year
 
 S2: tree A is in conflict with G F
 S2: tree G is in conflict with A F
