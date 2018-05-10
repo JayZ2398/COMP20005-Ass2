@@ -15,9 +15,11 @@ Jack Zezula
 #define TRUE 1
 #define FALSE 0
 
-#define GRID_WIDTH 70
 #define REG_HEIGHT 60
-#define GRID_HEIGHT REG_HEIGHT/2
+#define GRID_HEIGHT REG_HEIGHT/CELL_HEIGHT
+#define GRID_WIDTH 70
+#define CELL_HEIGHT 2
+#define CELL_WIDTH 1
 
 typedef struct {
 	// Stage 1 vars
@@ -47,8 +49,11 @@ typedef char Grid[GRID_WIDTH + 1][GRID_HEIGHT + 1];
 
 // Grid functions
 void initialise_grid(Grid grid);
-void print_grid(Grid grid);
+void print_grid(Grid grid, int stage);
 void print_xaxis();
+void calculate_grid(Grid grid, Forest forest, int num_trees);
+char cell_tree(double x_cent, double y_cent, Forest forest, int num_trees);
+double distance(double x1, double y1, double x2, double y2);
 
 // Tree functions
 void initialise_tree(Tree *tree);
@@ -64,6 +69,7 @@ int mygetchar();
 // Output functions
 void stage1_output(Forest forest, int num_trees, int total_water);
 void stage2_output(Forest forest, int num_trees);
+void stage3_output(Grid grid, Forest forest, int num_trees);
 
 int
 main(int argc, char *argv[]) {
@@ -80,36 +86,74 @@ main(int argc, char *argv[]) {
 	stage2_output(forest, num_trees);
 
 	initialise_grid(grid);
-	print_grid(grid);
+	stage3_output(grid, forest, num_trees);
 
 	return 0;
 }
 
 // Grid functions
 void initialise_grid(Grid grid) {
-	int x, y;
-	for (x = 0; x <= GRID_WIDTH; x++) {
-		for (y = 0; y <= GRID_HEIGHT; y++) {
-			grid[x][y] = ' ';
-			if (x == 23) {
-				grid[x][y] = 'J';
-			}
-			if (y == 23) {
-				grid[x][y] = 'Z';
-			}
+	int row, col;
+	// Set top and right boundary of grid to blank (will never contain trees)
+	for (row = 0; row <= GRID_HEIGHT; row++) {
+		grid[GRID_WIDTH][row] = ' ';
+	}
+	for (col = 0; col <= GRID_WIDTH; col++) {
+		grid[col][GRID_HEIGHT] = ' ';
+	}
+}
+
+void calculate_grid(Grid grid, Forest forest, int num_trees) {
+	int row, col;
+	double x, y, x_cent, y_cent;
+
+	// Iterate through grid, exclude final row/col points
+	for (row = 0; row < GRID_HEIGHT; row++) {
+		for (col = 0; col < GRID_WIDTH; col++) {
+			// Assign cell centre coords
+			x = (double) col;
+			y = (double) row*CELL_HEIGHT;
+			x_cent = x + CELL_WIDTH/2.0;
+			y_cent = y + CELL_HEIGHT/2.0;
+
+			// Find tree with catchment over point centre
+			grid[col][row] = cell_tree(x_cent, y_cent, forest, num_trees);
 		}
 	}
 }
 
-void print_grid(Grid grid) {
+char cell_tree(double x_cent, double y_cent, Forest forest, int num_trees) {
+	double min_dist, dist_to_tree;
+	int processed;
+	char cell_tree = ' ';
+	Tree *tree = NULL;
+
+	// Search forest for closest tree with catchment over cell
+	// Default distance is max distance possible within grid
+	min_dist = distance(0, 0, GRID_WIDTH, REG_HEIGHT);
+	for (processed = 0; processed < num_trees; processed++) {
+		tree = &forest[processed];
+		dist_to_tree = distance(x_cent, y_cent, tree->xloc, tree->yloc);
+
+		// Update cell label if tree has catchment, is closest yet, and still alive
+		if (dist_to_tree <= tree->radius && dist_to_tree < min_dist
+			  && tree->is_alive) {
+					min_dist = dist_to_tree;
+					cell_tree = tree->label;
+		}
+	}
+	return cell_tree;
+}
+
+void print_grid(Grid grid, int stage) {
 	int row, col;
 
 	for (row = GRID_HEIGHT; row >= 0; row--) {
-		// Print axis section on row
+		// Print axis
 		if (row % 5 == 0) {
-			printf("S3: %2d +", 2*row);
+			printf("S%d: %2d +", stage, 2*row);
 		} else {
-			printf("S3:    |");
+			printf("S%d:    |", stage);
 		}
 
 		// Print grid values
@@ -120,15 +164,15 @@ void print_grid(Grid grid) {
 	}
 
 	// Print bottom axis
-	print_xaxis();
+	print_xaxis(stage);
 	printf("\n\n");
 }
 
-void print_xaxis() {
+void print_xaxis(int stage) {
 	int col, next_col;
 
 	// Axis symbols
-	printf("S3:     ");
+	printf("S%d:     ", stage);
 	for (col = 0; col <= GRID_WIDTH; col++) {
 		if (col % 10 == 0) {
 			printf("+");
@@ -139,7 +183,7 @@ void print_xaxis() {
 
 	// Axis numbers
 	printf("\n"
-				 "S3:     0");
+				 "S%d:     0", stage);
 	for (col = 1; col <= GRID_WIDTH; col+=2) {
 		next_col = col + 1;
 		if (next_col % 10 == 0){
@@ -172,12 +216,13 @@ void find_conflicting_trees(Forest forest, int num_trees) {
 	double distance, tree_rad, other_rad;
 
 	// Declare pointers to trees in forest
-	Tree *tree = forest, *other;
+	Tree *tree = forest, *other = NULL;
 
 	// Iterate through trees in forest to find conflicts for each
-	for (processed = 0; processed < num_trees; processed++, tree++) {
+	for (processed = 0; processed < num_trees; processed++) {
+		tree = &forest[processed];
 		// For each processed tree, compare every other tree for distance
-		for (compared = 0; compared < num_trees; compared++, other++) {
+		for (compared = 0; compared < num_trees; compared++) {
 			other = &forest[compared];
 			// If compared trees are the same, skip to next tree
 			if (tree->label == other->label) {
@@ -196,10 +241,15 @@ void find_conflicting_trees(Forest forest, int num_trees) {
 }
 
 double distance_between_trees(Tree* tree, Tree* other) {
-	// Compute euclidean distance with Pythagoras theorem (hypotenuse length)
-	double x1, y1, x2, y2, a2, b2;
+	double x1, y1, x2, y2;
 	x1 = tree->xloc, y1 = tree->yloc;
 	x2 = other->xloc, y2 = other->yloc;
+	return distance(x1, y1, x2, y2);
+}
+
+double distance(double x1, double y1, double x2, double y2) {
+	double a2, b2;
+	// Compute euclidean distance with Pythagoras theorem (hypotenuse length)
 	a2 = (x2 - x1) * (x2 - x1);
 	b2 = (y2 - y1) * (y2 - y1);
 	// Calculate dist = c, c2 = a2 + b2
@@ -215,7 +265,7 @@ void stage1_output(Forest forest, int num_trees, int total_water) {
 
 void stage2_output(Forest forest, int num_trees) {
 	int processed, conf_tree, conflicts;
-	Tree *tree;
+	Tree *tree = NULL;
 
 	// Process all trees stored in data
 	for (processed = 0; processed < num_trees; tree++, processed++) {
@@ -230,6 +280,11 @@ void stage2_output(Forest forest, int num_trees) {
 		printf("\n");
 	}
 	printf("\n");
+}
+
+void stage3_output(Grid grid, Forest forest, int num_trees) {
+	calculate_grid(grid, forest, num_trees);
+	print_grid(grid, 3);
 }
 
 // Input handlers
