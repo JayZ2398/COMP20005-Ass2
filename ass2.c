@@ -2,7 +2,7 @@
 COMP20005 2018 S1
 Assignment 2
 Jack Zezula
-04/05/2018 - ????
+04/05/2018 - 10/05/2018
 */
 // programming is fun
 
@@ -38,7 +38,7 @@ typedef struct {
 
 /*
 A comment about the manipulation of the Trees in Forest:
-	In this program, I have chosen to assign pointers to trees of interest.
+	In this program, I frequently assign pointers to trees of interest.
 	This is because I think that:
 		tree->label
 	looks much nicer than:
@@ -103,7 +103,7 @@ void read_data(Forest forest, int *num_trees, double *total_water) {
 	double xloc, yloc, litres, rootrad;
 	Tree *tree = NULL;
 
-	while (scanf(" %c %lf %lf %lf %lf\n",
+	while (scanf(" %c %lf %lf %lf %lf ",
 	&label, &xloc, &yloc, &litres, &rootrad) == 5) {
 		// Use pointer to tree for easier assigment of properties during input read
 		tree = &forest[*num_trees];
