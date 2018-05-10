@@ -15,6 +15,10 @@ Jack Zezula
 #define TRUE 1
 #define FALSE 0
 
+#define GRID_WIDTH 70
+#define REG_HEIGHT 60
+#define GRID_HEIGHT REG_HEIGHT/2
+
 typedef struct {
 	// Stage 1 vars
 	char label;
@@ -29,7 +33,6 @@ typedef struct {
 	int is_alive;
 } Tree;
 
-
 /*
 A comment about the manipulation of the Trees in Forest:
 	In this program, I have chosen to assign pointers to trees of interest.
@@ -40,6 +43,12 @@ A comment about the manipulation of the Trees in Forest:
 */
 typedef Tree Forest[MAX_TREES];
 
+typedef char Grid[GRID_WIDTH + 1][GRID_HEIGHT + 1];
+
+// Grid functions
+void initialise_grid(Grid grid);
+void print_grid(Grid grid);
+void print_xaxis();
 
 // Tree functions
 void initialise_tree(Tree *tree);
@@ -58,10 +67,10 @@ void stage2_output(Forest forest, int num_trees);
 
 int
 main(int argc, char *argv[]) {
-	// Initialise data
-	Forest forest;
 	int num_trees = 0;
 	double total_water = 0;
+	Forest forest;
+	Grid grid;
 
 	remove_headers();
 	read_data(forest, &num_trees, &total_water);
@@ -70,12 +79,80 @@ main(int argc, char *argv[]) {
 	find_conflicting_trees(forest, num_trees);
 	stage2_output(forest, num_trees);
 
+	initialise_grid(grid);
+	print_grid(grid);
+
 	return 0;
+}
+
+// Grid functions
+void initialise_grid(Grid grid) {
+	int x, y;
+	for (x = 0; x <= GRID_WIDTH; x++) {
+		for (y = 0; y <= GRID_HEIGHT; y++) {
+			grid[x][y] = ' ';
+			if (x == 23) {
+				grid[x][y] = 'J';
+			}
+			if (y == 23) {
+				grid[x][y] = 'Z';
+			}
+		}
+	}
+}
+
+void print_grid(Grid grid) {
+	int row, col;
+
+	for (row = GRID_HEIGHT; row >= 0; row--) {
+		// Print axis section on row
+		if (row % 5 == 0) {
+			printf("S3: %2d +", 2*row);
+		} else {
+			printf("S3:    |");
+		}
+
+		// Print grid values
+		for (col = 0; col <= GRID_WIDTH; col++) {
+			printf("%c", grid[col][row]);
+		}
+		printf("\n");
+	}
+
+	// Print bottom axis
+	print_xaxis();
+	printf("\n\n");
+}
+
+void print_xaxis() {
+	int col, next_col;
+
+	// Axis symbols
+	printf("S3:     ");
+	for (col = 0; col <= GRID_WIDTH; col++) {
+		if (col % 10 == 0) {
+			printf("+");
+		} else {
+			printf("-");
+		}
+	}
+
+	// Axis numbers
+	printf("\n"
+				 "S3:     0");
+	for (col = 1; col <= GRID_WIDTH; col+=2) {
+		next_col = col + 1;
+		if (next_col % 10 == 0){
+			printf("%2d", col+1);
+		} else {
+			printf("  ");
+		}
+	}
 }
 
 // Tree functions
 void initialise_tree(Tree *tree) {
-	// Initialise particular members to their default value
+	// Initialise tree properties to default values
 	tree->num_conflicts = 0;
 	tree->catchment_cells = 0;
 	tree->is_alive = TRUE;
@@ -137,7 +214,6 @@ void stage1_output(Forest forest, int num_trees, int total_water) {
 }
 
 void stage2_output(Forest forest, int num_trees) {
-	// Counter variable and pointer declaration
 	int processed, conf_tree, conflicts;
 	Tree *tree;
 
@@ -158,7 +234,6 @@ void stage2_output(Forest forest, int num_trees) {
 
 // Input handlers
 void read_data(Forest forest, int *num_trees, double *total_water) {
-	// Input variables for table data
 	char label;
 	double xloc, yloc, litres, rootrad;
 
@@ -166,8 +241,6 @@ void read_data(Forest forest, int *num_trees, double *total_water) {
 	Tree *tree = forest;
 	while (scanf(" %c %lf %lf %lf %lf\n",
 				 &label, &xloc, &yloc, &litres, &rootrad) == 5) {
-
-					// Read input info into tree structure
 					tree->label = label;
 					tree->xloc = xloc;
 					tree->yloc = yloc;
@@ -183,8 +256,11 @@ void read_data(Forest forest, int *num_trees, double *total_water) {
 					*num_trees += 1;
 					tree++;
 	 }
- }
+}
 
+/* remove_headers by Jack Zezula (ME), taken from:
+/storage3/beta/students/j/jzezula/COMP20005/Projects/Ass1/ass1.c
+*/
 void remove_headers() {
 	/*Consume all characters until header lines have been consumed*/
 	int c;
@@ -196,6 +272,9 @@ void remove_headers() {
 	}
 }
 
+/* mygetchar by Alistair Moffat, taken from:
+https://people.eng.unimelb.edu.au/ammoffat/teaching/20005/ass2/
+*/
 int	mygetchar() {
 	int c;
 	while ((c=getchar())=='\r');
