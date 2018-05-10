@@ -14,7 +14,6 @@ Jack Zezula
 #define HEADER_LINES 1
 #define TRUE 1
 #define FALSE 0
-#define KILO 1000.0
 
 #define REG_HEIGHT 60
 #define GRID_HEIGHT REG_HEIGHT/CELL_HEIGHT
@@ -32,7 +31,7 @@ typedef struct {
 	int num_conflicts;
 	char conflicts[MAX_TREES - 1];
 
-	//Stage 3 & 4
+	//Stages 3 & 4
 	int catchment_cells;
 	int is_alive;
 } Tree;
@@ -49,25 +48,25 @@ typedef Tree Forest[MAX_TREES];
 
 typedef char Grid[GRID_WIDTH + 1][GRID_HEIGHT + 1];
 
+// Input handlers
+void read_data(Forest forest, int *num_trees, double *total_water);
+void remove_headers();
+int mygetchar();
+
+// Tree functions
+void initialise_tree(Tree *tree);
+void print_tree_data(Tree *tree);
+void find_conflicting_trees(Forest forest, int num_trees);
+double distance(double x1, double y1, double x2, double y2);
+double distance_between_trees(Tree *tree, Tree *other);
+double find_stress_factor(Tree *tree, double rainfall);
+
 // Grid functions
 void initialise_grid(Grid grid);
 void print_grid(Grid grid, int stage);
 void print_xaxis();
 void calculate_grid(Grid grid, Forest forest, int num_trees);
 char cell_tree(double x_cent, double y_cent, Forest forest, int num_trees);
-double distance(double x1, double y1, double x2, double y2);
-
-// Tree functions
-void initialise_tree(Tree *tree);
-void print_tree_data(Tree *tree);
-void find_conflicting_trees(Forest forest, int num_trees);
-double distance_between_trees(Tree *tree, Tree *other);
-double find_stress_factor(Tree *tree, double rainfall);
-
-// Input handlers
-void read_data(Forest forest, int *num_trees, double *total_water);
-void remove_headers();
-int mygetchar();
 
 // Output functions
 void stage1_output(Forest forest, int num_trees, int total_water);
@@ -75,6 +74,7 @@ void stage2_output(Forest forest, int num_trees);
 void stage3_output(Grid grid, Forest forest, int num_trees);
 void stage4_output(Grid grid, Forest forest, int num_trees, double rainfall);
 
+// Main function
 int
 main(int argc, char *argv[]) {
 	int num_trees = 0;
@@ -98,112 +98,53 @@ main(int argc, char *argv[]) {
 	return 0;
 }
 
-// Grid functions
-void initialise_grid(Grid grid) {
-	int row, col;
-	// Set top and right boundary of grid to blank (will never contain trees)
-	for (row = 0; row <= GRID_HEIGHT; row++) {
-		grid[GRID_WIDTH][row] = ' ';
-	}
-	for (col = 0; col <= GRID_WIDTH; col++) {
-		grid[col][GRID_HEIGHT] = ' ';
-	}
-}
+// Input handlers
+void read_data(Forest forest, int *num_trees, double *total_water) {
+	char label;
+	double xloc, yloc, litres, rootrad;
 
-void calculate_grid(Grid grid, Forest forest, int num_trees) {
-	int row, col;
-	double x, y, x_cent, y_cent;
+	// Use pointer to tree for easier assigment of properties during input read
+	Tree *tree = forest;
+	while (scanf(" %c %lf %lf %lf %lf\n",
+	&label, &xloc, &yloc, &litres, &rootrad) == 5) {
+		tree->label = label;
+		tree->xloc = xloc;
+		tree->yloc = yloc;
+		tree->litres = litres;
+		tree->radius = rootrad;
+		//print_tree_data(tree);
 
-	// Iterate through grid, exclude final row/col points
-	for (row = 0; row < GRID_HEIGHT; row++) {
-		for (col = 0; col < GRID_WIDTH; col++) {
-			// Assign cell centre coords
-			x = (double) col;
-			y = (double) row*CELL_HEIGHT;
-			x_cent = x + CELL_WIDTH/2.0;
-			y_cent = y + CELL_HEIGHT/2.0;
+		// Assign all other tree attributes to their defaults
+		initialise_tree(tree);
 
-			// Find tree with catchment over point centre
-			grid[col][row] = cell_tree(x_cent, y_cent, forest, num_trees);
-		}
+		// Update total water and tree count, and point to next tree
+		*total_water += litres;
+		*num_trees += 1;
+		tree++;
 	}
 }
 
-char cell_tree(double x_cent, double y_cent, Forest forest, int num_trees) {
-	double min_dist, dist_to_tree;
-	int processed;
-	char cell_label = ' ';
-	Tree *tree = NULL, *cell_tree = NULL;
-
-	// Search forest for closest tree with catchment over cell
-	// Default distance is max distance possible within grid
-	min_dist = distance(0, 0, GRID_WIDTH, REG_HEIGHT);
-	for (processed = 0; processed < num_trees; processed++) {
-		tree = &forest[processed];
-		dist_to_tree = distance(x_cent, y_cent, tree->xloc, tree->yloc);
-
-		// Update cell label if tree has catchment, is closest yet, and still alive
-		if (dist_to_tree <= tree->radius && dist_to_tree < min_dist
-			  && tree->is_alive) {
-					min_dist = dist_to_tree;
-					cell_label = tree->label;
-					cell_tree = tree;
+/* remove_headers by Jack Zezula (ME), taken from:
+/storage3/beta/students/j/jzezula/COMP20005/Projects/Ass1/ass1.c
+*/
+void remove_headers() {
+	/*Consume all characters until header lines have been consumed*/
+	int c;
+	int newlines = 0;
+	while ( newlines < HEADER_LINES && (c = mygetchar()) ) {
+		if (c == '\n') {
+			newlines++;
 		}
 	}
-	// Add to tree catchment cell count, return label
-	if (cell_tree) {
-		cell_tree->catchment_cells++;
-	}
-	return cell_label;
 }
 
-void print_grid(Grid grid, int stage) {
-	int row, col;
-
-	for (row = GRID_HEIGHT; row >= 0; row--) {
-		// Print axis
-		if (row % 5 == 0) {
-			printf("S%d: %2d +", stage, 2*row);
-		} else {
-			printf("S%d:    |", stage);
-		}
-
-		// Print grid values
-		for (col = 0; col <= GRID_WIDTH; col++) {
-			printf("%c", grid[col][row]);
-		}
-		printf("\n");
-	}
-
-	// Print bottom axis
-	print_xaxis(stage);
-	printf("\n\n");
-}
-
-void print_xaxis(int stage) {
-	int col, next_col;
-
-	// Axis symbols
-	printf("S%d:     ", stage);
-	for (col = 0; col <= GRID_WIDTH; col++) {
-		if (col % 10 == 0) {
-			printf("+");
-		} else {
-			printf("-");
-		}
-	}
-
-	// Axis numbers
-	printf("\n"
-				 "S%d:     0", stage);
-	for (col = 1; col <= GRID_WIDTH; col+=2) {
-		next_col = col + 1;
-		if (next_col % 10 == 0){
-			printf("%2d", col+1);
-		} else {
-			printf("  ");
-		}
-	}
+/* mygetchar by Alistair Moffat, taken from:
+https://people.eng.unimelb.edu.au/ammoffat/teaching/20005/ass2/
+*/
+int	mygetchar() {
+	int c;
+	while ((c=getchar())=='\r');
+	return c;
 }
 
 // Tree functions
@@ -252,13 +193,6 @@ void find_conflicting_trees(Forest forest, int num_trees) {
 	}
 }
 
-double distance_between_trees(Tree* tree, Tree* other) {
-	double x1, y1, x2, y2;
-	x1 = tree->xloc, y1 = tree->yloc;
-	x2 = other->xloc, y2 = other->yloc;
-	return distance(x1, y1, x2, y2);
-}
-
 double distance(double x1, double y1, double x2, double y2) {
 	double a2, b2;
 	// Compute euclidean distance with Pythagoras theorem (hypotenuse length)
@@ -267,6 +201,132 @@ double distance(double x1, double y1, double x2, double y2) {
 	// Calculate dist = c, c2 = a2 + b2
 	return sqrt(a2 + b2);
 }
+
+double distance_between_trees(Tree* tree, Tree* other) {
+	double x1, y1, x2, y2;
+	x1 = tree->xloc, y1 = tree->yloc;
+	x2 = other->xloc, y2 = other->yloc;
+	return distance(x1, y1, x2, y2);
+}
+
+double find_stress_factor(Tree *tree, double rainfall) {
+	double stress_factor, water_needed, water_available;
+
+	water_needed = tree->litres;
+	water_available = CELL_AREA * rainfall * tree->catchment_cells;
+	stress_factor = water_needed / water_available;
+	tree->catchment_cells = 0;
+
+	return stress_factor;
+}
+
+// Grid functions
+void initialise_grid(Grid grid) {
+	int row, col;
+	// Set top and right boundary of grid to blank (will never contain trees)
+	for (row = 0; row <= GRID_HEIGHT; row++) {
+		grid[GRID_WIDTH][row] = ' ';
+	}
+	for (col = 0; col <= GRID_WIDTH; col++) {
+		grid[col][GRID_HEIGHT] = ' ';
+	}
+}
+
+void calculate_grid(Grid grid, Forest forest, int num_trees) {
+	int row, col;
+	double x, y, x_cent, y_cent;
+
+	// Iterate through grid, exclude final row/col points
+	for (row = 0; row < GRID_HEIGHT; row++) {
+		for (col = 0; col < GRID_WIDTH; col++) {
+			// Assign cell centre coords
+			x = (double) col;
+			y = (double) row*CELL_HEIGHT;
+			x_cent = x + CELL_WIDTH/2.0;
+			y_cent = y + CELL_HEIGHT/2.0;
+
+			// Find tree with catchment over point centre
+			grid[col][row] = cell_tree(x_cent, y_cent, forest, num_trees);
+		}
+	}
+}
+
+char cell_tree(double x_cent, double y_cent, Forest forest, int num_trees) {
+	double min_dist, dist_to_tree;
+	int processed;
+	char cell_label = ' ';
+	Tree *tree = NULL, *cell_tree = NULL;
+
+	// Search forest for closest tree with catchment over cell
+	// Default distance is max distance possible within grid
+	min_dist = distance(0, 0, GRID_WIDTH, REG_HEIGHT);
+	for (processed = 0; processed < num_trees; processed++) {
+		tree = &forest[processed];
+		dist_to_tree = distance(x_cent, y_cent, tree->xloc, tree->yloc);
+
+		// Update cell label if tree has catchment, is closest yet, and still alive
+		if (dist_to_tree <= tree->radius && dist_to_tree < min_dist
+			&& tree->is_alive) {
+				min_dist = dist_to_tree;
+				cell_label = tree->label;
+				cell_tree = tree;
+			}
+		}
+		// Add to tree catchment cell count, return label
+		if (cell_tree) {
+			cell_tree->catchment_cells++;
+		}
+		return cell_label;
+	}
+
+void print_grid(Grid grid, int stage) {
+		int row, col;
+
+		for (row = GRID_HEIGHT; row >= 0; row--) {
+			// Print axis
+			if (row % 5 == 0) {
+				printf("S%d: %2d +", stage, 2*row);
+			} else {
+				printf("S%d:    |", stage);
+			}
+
+			// Print grid values
+			for (col = 0; col <= GRID_WIDTH; col++) {
+				printf("%c", grid[col][row]);
+			}
+			printf("\n");
+		}
+
+		// Print bottom axis
+		print_xaxis(stage);
+		printf("\n\n");
+	}
+
+void print_xaxis(int stage) {
+		int col, next_col;
+
+		// Axis symbols
+		printf("S%d:     ", stage);
+		for (col = 0; col <= GRID_WIDTH; col++) {
+			if (col % 10 == 0) {
+				printf("+");
+			} else {
+				printf("-");
+			}
+		}
+
+		// Axis numbers
+		printf("\n"
+		"S%d:     0", stage);
+		for (col = 1; col <= GRID_WIDTH; col+=2) {
+			next_col = col + 1;
+			if (next_col % 10 == 0){
+				printf("%2d", col+1);
+			} else {
+				printf("  ");
+			}
+		}
+	}
 
 // Output functions
 void stage1_output(Forest forest, int num_trees, int total_water) {
@@ -333,64 +393,4 @@ void stage4_output(Grid grid, Forest forest, int num_trees, double rainfall) {
 	// Print final map when no further trees will die
 	printf("\n");
 	print_grid(grid, 4);
-}
-
-double find_stress_factor(Tree *tree, double rainfall) {
-	double stress_factor, water_needed, water_available;
-
-	water_needed = tree->litres;
-	water_available = CELL_AREA * rainfall * tree->catchment_cells;
-	stress_factor = water_needed / water_available;
-	tree->catchment_cells = 0;
-
-	return stress_factor;
-}
-
-// Input handlers
-void read_data(Forest forest, int *num_trees, double *total_water) {
-	char label;
-	double xloc, yloc, litres, rootrad;
-
-	// Use pointer to tree for easier assigment of properties during input read
-	Tree *tree = forest;
-	while (scanf(" %c %lf %lf %lf %lf\n",
-				 &label, &xloc, &yloc, &litres, &rootrad) == 5) {
-					tree->label = label;
-					tree->xloc = xloc;
-					tree->yloc = yloc;
-					tree->litres = litres;
-					tree->radius = rootrad;
-					//print_tree_data(tree);
-
-					// Assign all other tree attributes to their defaults
-					initialise_tree(tree);
-
-					// Update total water and tree count, and point to next tree
-					*total_water += litres;
-					*num_trees += 1;
-					tree++;
-	 }
-}
-
-/* remove_headers by Jack Zezula (ME), taken from:
-/storage3/beta/students/j/jzezula/COMP20005/Projects/Ass1/ass1.c
-*/
-void remove_headers() {
-	/*Consume all characters until header lines have been consumed*/
-	int c;
-	int newlines = 0;
-	while ( newlines < HEADER_LINES && (c = mygetchar()) ) {
-		if (c == '\n') {
-			newlines++;
-		}
-	}
-}
-
-/* mygetchar by Alistair Moffat, taken from:
-https://people.eng.unimelb.edu.au/ammoffat/teaching/20005/ass2/
-*/
-int	mygetchar() {
-	int c;
-	while ((c=getchar())=='\r');
-	return c;
 }
