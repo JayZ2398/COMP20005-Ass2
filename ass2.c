@@ -321,8 +321,9 @@ void print_xaxis(int stage) {
 // Output functions
 void stage1_output(Forest forest, int num_trees, int total_water) {
 	double megalitres = (double) (total_water) / 1e6;
+	printf("\n");
 	printf("S1: total data lines   = %5d trees\n", num_trees);
-	printf("S1: total water needed = %5.3f megalitres\n\n", megalitres);
+	printf("S1: total water needed = %5.3f megaliters per year\n\n", megalitres);
 }
 
 void stage2_output(Forest forest, int num_trees) {
@@ -347,6 +348,7 @@ void stage2_output(Forest forest, int num_trees) {
 void stage3_output(Grid grid, Forest forest, int num_trees) {
 	calculate_grid(grid, forest, num_trees);
 	print_grid(grid, 3);
+	printf("\n");
 }
 
 void stage4_output(Grid grid, Forest forest, int num_trees, double rainfall) {

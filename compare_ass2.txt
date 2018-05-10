@@ -1,0 +1,26 @@
+gcc -Wall -lm ass2.c -o ass2
+
+ass2 < Inputs/test0.tsv 120 > Outputs/jz-test0-120.txt
+ass2 < Inputs/test0.tsv 200 > Outputs/jz-test0-200.txt
+ass2 < Inputs/test1.tsv 120 > Outputs/jz-test1-120.txt
+ass2 < Inputs/test1.tsv 200 > Outputs/jz-test1-200.txt
+ass2 < Inputs/test2.tsv 120 > Outputs/jz-test2-120.txt
+ass2 < Inputs/test2.tsv 200 > Outputs/jz-test2-200.txt
+
+cd Outputs
+echo test0 120
+diff jz-test0-120.txt test0-120-out.txt --side-by-side --suppress-common-lines -b
+echo test0 200
+diff jz-test0-200.txt test0-200-out.txt --side-by-side --suppress-common-lines -b
+
+echo test1 120
+diff jz-test1-120.txt test1-120-out.txt --side-by-side --suppress-common-lines -b
+echo test1 200
+diff jz-test1-200.txt test1-200-out.txt --side-by-side --suppress-common-lines -b
+
+echo test2 120
+diff jz-test2-120.txt test2-120-out.txt --side-by-side --suppress-common-lines -b
+echo test2 200
+diff jz-test2-200.txt test2-200-out.txt --side-by-side --suppress-common-lines -b
+
+echo END COMPARISON
