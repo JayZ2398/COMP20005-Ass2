@@ -125,8 +125,8 @@ void calculate_grid(Grid grid, Forest forest, int num_trees) {
 char cell_tree(double x_cent, double y_cent, Forest forest, int num_trees) {
 	double min_dist, dist_to_tree;
 	int processed;
-	char cell_tree = ' ';
-	Tree *tree = NULL;
+	char cell_label = ' ';
+	Tree *tree = NULL, *cell_tree = NULL;
 
 	// Search forest for closest tree with catchment over cell
 	// Default distance is max distance possible within grid
@@ -139,10 +139,15 @@ char cell_tree(double x_cent, double y_cent, Forest forest, int num_trees) {
 		if (dist_to_tree <= tree->radius && dist_to_tree < min_dist
 			  && tree->is_alive) {
 					min_dist = dist_to_tree;
-					cell_tree = tree->label;
+					cell_label = tree->label;
+					cell_tree = tree;
 		}
 	}
-	return cell_tree;
+	// Add to tree catchment cell count, return label
+	if (cell_tree) {
+		cell_tree->catchment_cells++;
+	}
+	return cell_label;
 }
 
 void print_grid(Grid grid, int stage) {
