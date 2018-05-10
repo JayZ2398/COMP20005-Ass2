@@ -29,7 +29,17 @@ typedef struct {
 	int is_alive;
 } Tree;
 
+
+/*
+A comment about the manipulation of the Trees in Forest:
+	In this program, I have chosen to assign pointers to trees of interest.
+	This is because I think that:
+		tree->label
+	looks much nicer than:
+		forest[tree_index].label
+*/
 typedef Tree Forest[MAX_TREES];
+
 
 // Tree functions
 void initialise_tree(Tree *tree);
@@ -89,10 +99,10 @@ void find_conflicting_trees(Forest forest, int num_trees) {
 
 	// Iterate through trees in forest to find conflicts for each
 	for (processed = 0; processed < num_trees; processed++, tree++) {
-		// Set comparison tree, iterate through other trees
+		// For each processed tree, compare every other tree for distance
 		for (compared = 0; compared < num_trees; compared++, other++) {
 			other = &forest[compared];
-			// If other tree is the same, skip to next tree
+			// If compared trees are the same, skip to next tree
 			if (tree->label == other->label) {
 				continue;
 			}
