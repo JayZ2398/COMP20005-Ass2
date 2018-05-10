@@ -55,7 +55,6 @@ int mygetchar();
 
 // Tree functions
 void initialise_tree(Tree *tree);
-void print_tree_data(Tree *tree);
 void find_conflicting_trees(Forest forest, int num_trees);
 double distance(double x1, double y1, double x2, double y2);
 double distance_between_trees(Tree *tree, Tree *other);
@@ -102,17 +101,17 @@ main(int argc, char *argv[]) {
 void read_data(Forest forest, int *num_trees, double *total_water) {
 	char label;
 	double xloc, yloc, litres, rootrad;
+	Tree *tree = NULL;
 
-	// Use pointer to tree for easier assigment of properties during input read
-	Tree *tree = forest;
 	while (scanf(" %c %lf %lf %lf %lf\n",
 	&label, &xloc, &yloc, &litres, &rootrad) == 5) {
+		// Use pointer to tree for easier assigment of properties during input read
+		tree = &forest[*num_trees];
 		tree->label = label;
 		tree->xloc = xloc;
 		tree->yloc = yloc;
 		tree->litres = litres;
 		tree->radius = rootrad;
-		//print_tree_data(tree);
 
 		// Assign all other tree attributes to their defaults
 		initialise_tree(tree);
@@ -153,15 +152,6 @@ void initialise_tree(Tree *tree) {
 	tree->num_conflicts = 0;
 	tree->catchment_cells = 0;
 	tree->is_alive = TRUE;
-}
-
-void print_tree_data(Tree *tree) {
-	printf("==== Tree at %p (%d bytes)\n", tree, sizeof(*tree));
-	printf("tree->label  = %c\n", tree->label);
-	printf("tree->xloc   = %f\n", tree->xloc);
-	printf("tree->yloc   = %f\n", tree->yloc);
-	printf("tree->litres = %f\n", tree->litres);
-	printf("tree->radius = %f\n\n", tree->radius);
 }
 
 void find_conflicting_trees(Forest forest, int num_trees) {
@@ -365,7 +355,7 @@ void stage4_output(Grid grid, Forest forest, int num_trees, double rainfall) {
 	Tree* tree = NULL, *dead_tree = NULL;
 
 	printf("S4: rainfall amount = %.1f\n", rainfall);
-	while (tree_has_died) {
+	while (tree_has_died && rainfall) {
 		// Set default conditions
 		tree_has_died = FALSE;
 		dead_tree = NULL;
