@@ -14,12 +14,14 @@ Jack Zezula
 #define HEADER_LINES 1
 #define TRUE 1
 #define FALSE 0
+#define KILO 1000.0
 
 #define REG_HEIGHT 60
 #define GRID_HEIGHT REG_HEIGHT/CELL_HEIGHT
 #define GRID_WIDTH 70
 #define CELL_HEIGHT 2
 #define CELL_WIDTH 1
+#define CELL_AREA CELL_HEIGHT * CELL_WIDTH
 
 typedef struct {
 	// Stage 1 vars
@@ -60,6 +62,7 @@ void initialise_tree(Tree *tree);
 void print_tree_data(Tree *tree);
 void find_conflicting_trees(Forest forest, int num_trees);
 double distance_between_trees(Tree *tree, Tree *other);
+double find_stress_factor(Tree *tree, double rainfall);
 
 // Input handlers
 void read_data(Forest forest, int *num_trees, double *total_water);
@@ -70,11 +73,13 @@ int mygetchar();
 void stage1_output(Forest forest, int num_trees, int total_water);
 void stage2_output(Forest forest, int num_trees);
 void stage3_output(Grid grid, Forest forest, int num_trees);
+void stage4_output(Grid grid, Forest forest, int num_trees, double rainfall);
 
 int
 main(int argc, char *argv[]) {
 	int num_trees = 0;
 	double total_water = 0;
+	double rainfall = atof(argv[1]);
 	Forest forest;
 	Grid grid;
 
@@ -87,6 +92,8 @@ main(int argc, char *argv[]) {
 
 	initialise_grid(grid);
 	stage3_output(grid, forest, num_trees);
+
+	stage4_output(grid, forest, num_trees, rainfall);
 
 	return 0;
 }
@@ -290,6 +297,53 @@ void stage2_output(Forest forest, int num_trees) {
 void stage3_output(Grid grid, Forest forest, int num_trees) {
 	calculate_grid(grid, forest, num_trees);
 	print_grid(grid, 3);
+}
+
+void stage4_output(Grid grid, Forest forest, int num_trees, double rainfall) {
+	int processed, tree_has_died = TRUE;
+	double stress_factor, max_stress_factor;
+	Tree* tree = NULL, *dead_tree = NULL;
+
+	printf("S4: rainfall amount = %.1f\n", rainfall);
+	while (tree_has_died) {
+		// Set default conditions
+		tree_has_died = FALSE;
+		dead_tree = NULL;
+		max_stress_factor = 1.0;
+		for (processed = 0; processed < num_trees; processed++) {
+			tree = &forest[processed];
+			// Find stress factor for tree, and reset cells for next calculation
+			stress_factor = find_stress_factor(tree, rainfall);
+
+			// Record tree with highest stress factor
+			if (stress_factor > max_stress_factor && tree->is_alive) {
+				tree_has_died = TRUE;
+				max_stress_factor = stress_factor;
+				dead_tree = tree;
+			}
+		}
+		if (tree_has_died) {
+			// Announce dead tree, recalculate survivors' catchment cells
+			dead_tree->is_alive = 0;
+			printf("S4: tree %c has stress factor %.2f and dies next\n",
+						 dead_tree->label, max_stress_factor);
+ 		  calculate_grid(grid, forest, num_trees);
+		}
+	}
+	// Print final map when no further trees will die
+	printf("\n");
+	print_grid(grid, 4);
+}
+
+double find_stress_factor(Tree *tree, double rainfall) {
+	double stress_factor, water_needed, water_available;
+
+	water_needed = tree->litres;
+	water_available = CELL_AREA * rainfall * tree->catchment_cells;
+	stress_factor = water_needed / water_available;
+	tree->catchment_cells = 0;
+
+	return stress_factor;
 }
 
 // Input handlers
