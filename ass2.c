@@ -103,7 +103,7 @@ void read_data(Forest forest, int *num_trees, double *total_water) {
 	double xloc, yloc, litres, rootrad;
 	Tree *tree = NULL;
 
-	while (scanf(" %c %lf %lf %lf %lf ",
+	while (scanf("%c%lf%lf%lf%lf",
 	&label, &xloc, &yloc, &litres, &rootrad) == 5) {
 		// Use pointer to tree for easier assigment of properties during input read
 		tree = &forest[*num_trees];
@@ -120,6 +120,9 @@ void read_data(Forest forest, int *num_trees, double *total_water) {
 		*total_water += litres;
 		*num_trees += 1;
 		tree++;
+
+		// Clear line remainder to prime buffer for scanning the next tree
+		remove_headers();
 	}
 }
 
@@ -202,6 +205,7 @@ double distance_between_trees(Tree* tree, Tree* other) {
 double find_stress_factor(Tree *tree, double rainfall) {
 	double stress_factor, water_needed, water_available;
 
+	// Find stress factor and reset tree catchment cells to zero
 	water_needed = tree->litres;
 	water_available = CELL_AREA * rainfall * tree->catchment_cells;
 	stress_factor = water_needed / water_available;
@@ -273,9 +277,9 @@ void print_grid(Grid grid, int stage) {
 		int row, col;
 
 		for (row = GRID_HEIGHT; row >= 0; row--) {
-			// Print axis
-			if (row % 5 == 0) {
-				printf("S%d: %2d +", stage, 2*row);
+			// Print axis every 10 units (depends on cell height)
+			if (row % (10 / CELL_HEIGHT) == 0) {
+				printf("S%d:%3d +", stage, CELL_HEIGHT*row);
 			} else {
 				printf("S%d:    |", stage);
 			}
@@ -293,7 +297,8 @@ void print_grid(Grid grid, int stage) {
 	}
 
 void print_xaxis(int stage) {
-		int col, next_col;
+		// In this function, assume x-axis will always be marked + every 10 points
+		int col;
 
 		// Axis symbols
 		printf("S%d:     ", stage);
@@ -308,15 +313,10 @@ void print_xaxis(int stage) {
 		// Axis numbers
 		printf("\n"
 		"S%d:     0", stage);
-		for (col = 1; col <= GRID_WIDTH; col+=2) {
-			next_col = col + 1;
-			if (next_col % 10 == 0){
-				printf("%2d", col+1);
-			} else {
-				printf("  ");
-			}
+		for (col = 10; col <= GRID_WIDTH; col+=10) {
+			printf("%10d", col);
 		}
-	}
+}
 
 // Output functions
 void stage1_output(Forest forest, int num_trees, int total_water) {
