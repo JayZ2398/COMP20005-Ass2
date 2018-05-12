@@ -14,6 +14,7 @@ Jack Zezula
 #define HEADER_LINES 1
 #define TRUE 1
 #define FALSE 0
+#define MEGA 1.0e6
 
 #define REG_HEIGHT 60
 #define GRID_HEIGHT REG_HEIGHT/CELL_HEIGHT
@@ -233,7 +234,7 @@ void calculate_grid(Grid grid, Forest forest, int num_trees) {
 	// Iterate through grid, exclude final row/col points
 	for (row = 0; row < GRID_HEIGHT; row++) {
 		for (col = 0; col < GRID_WIDTH; col++) {
-			// Assign cell centre coords
+			// Assign cell centre coords, divide by 2.0 to find midpoint
 			x = (double) col;
 			y = (double) row*CELL_HEIGHT;
 			x_cent = x + CELL_WIDTH/2.0;
@@ -320,7 +321,7 @@ void print_xaxis(int stage) {
 
 // Output functions
 void stage1_output(Forest forest, int num_trees, int total_water) {
-	double megalitres = (double) (total_water) / 1e6;
+	double megalitres = (double) (total_water) / MEGA;
 	printf("\n");
 	printf("S1: total data lines   = %5d trees\n", num_trees);
 	printf("S1: total water needed = %5.3f megaliters per year\n\n", megalitres);
