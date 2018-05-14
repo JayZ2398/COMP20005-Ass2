@@ -234,7 +234,7 @@ void calculate_grid(Grid grid, Forest forest, int num_trees) {
 	// Iterate through grid, exclude final row/col points
 	for (row = 0; row < GRID_HEIGHT; row++) {
 		for (col = 0; col < GRID_WIDTH; col++) {
-			// Assign cell centre coords
+			// Assign cell centre coords, divide by 2.0 to find midpoint
 			x = (double) col;
 			y = (double) row*CELL_HEIGHT;
 			x_cent = x + CELL_WIDTH/2.0;
