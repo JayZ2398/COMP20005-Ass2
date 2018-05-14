@@ -1,9 +1,0 @@
-#!/bin/bash
-
-ls "Custom Inputs/"
-
-for input in "Custom Inputs"/*
-do	echo "Processing $input file..."
-	echo "Name $(basename $input)"
-	ass2 < "$input" 120 > "Custom Outputs/"$name"_out.txt"
-done

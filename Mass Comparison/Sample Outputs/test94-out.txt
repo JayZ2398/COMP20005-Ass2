@@ -1,0 +1,111 @@
+
+S1: total data lines   =    20 trees
+S1: total water needed = 0.431 megaliters per year
+
+S2: tree R is in conflict with E 
+S2: tree D is in conflict with w E s G J d C 
+S2: tree N is in conflict with v 
+S2: tree w is in conflict with D d 
+S2: tree e is in conflict with Q V A n G B d 
+S2: tree Q is in conflict with e 
+S2: tree E is in conflict with R D G d 
+S2: tree V is in conflict with e A G B d 
+S2: tree A is in conflict with e V G B d 
+S2: tree n is in conflict with e B 
+S2: tree s is in conflict with D 
+S2: tree g is in conflict with 
+S2: tree c is in conflict with G h 
+S2: tree v is in conflict with N 
+S2: tree G is in conflict with D e E V A c B d 
+S2: tree J is in conflict with D d 
+S2: tree B is in conflict with e V A n G d 
+S2: tree h is in conflict with c 
+S2: tree d is in conflict with D w e E V A G J B C 
+S2: tree C is in conflict with D d 
+
+S3: 60 +                                                                       
+S3:    |   NNNNNN                                       nnnn                   
+S3:    |  NNNNNNNN                                    nnnnnnnn                 
+S3:    | vvvNNNNNN                                eeeennnnnnnnneeee            
+S3:    |vvvvvvNNN                              eeeeeeennnnnnnneeeeeeeeQQQ      
+S3: 50 +  vv                                 eeeeeeeeeeennnnneeeeeeeeQQQQQ     
+S3:    |                                   eeeeeBBBBBeeeeeeeeeeeeeeeeQQQQe     
+S3:    |                                  eeeBBBBBBBBBeeeeeeeeeeeeeeeeeeeee    
+S3:    |                                  eAAABBBBBBBBeeeeeeeeeeeeeeeeeeeeee   
+S3:    |                                 AAAAAAABBBBBBBeeeeeeeeeeeeeeeeeeeee   
+S3: 40 +                                AAAAAAAAABBBBBBBeeeeeeeeeeeeeeeeeeee   
+S3:    |                               AAAAAAAAAAAABBBBBBeeeeeeeeeeeeeeeeeee   
+S3:    |                               AAAAAAAAAAAAAABBBBeeeeeeeeeeeeeeeeeee   
+S3:    |                              AAAAAAAAAAAAAAAAABBBeeeeeeeeeeeeeeeeee   
+S3:    |                            GGGGAAAAAAAAAAAAAAAABBBeeeeeeeeeeeeeeee    
+S3: 30 +                          GGGGGGGGGAAAAAAAAAAAAAAABBeeeeeeeeeeeeee     
+S3:    |                        GGGGGGGGGGGGGGGAAAAAAAAAAAAABeeeeeeeeeeee      
+S3:    |                       GGGGGGGGGGGGGGGGGGGGAVVVVVVdddddddddddeee       
+S3:    |                       GGGGGGGGGGGGGGGGGGGVVVVVVVVVVdddddddddd         
+S3:    |  gggg                GGGGGGGGGGGGGGGGGGGGVVVVVVVVVVddddddddddd        
+S3: 20 +gggggggg              GGGGGGGGGGGGGGGGGGGGdVVVVVVdddddddddddddd        
+S3:    |gggggggg       ccccccccGGGGGGGGGGGGGGGGGGGdddddddddddddddddddddd       
+S3:    | gggggg      ccccccccccccGGGGGGGGGGGGGGGGddddddddddCCCCDddddddJJJJJ    
+S3:    |            ccccccccccccccGGGGGGEEEEEEEEEEEddddddddCCCCDDDDddJJJJJJJJ  
+S3:    |            cccccccccccccccGGEEEEEEEEEEEEEEEdddddDDDDDDDDDDDJJJJJJJJJ  
+S3: 10 +            cccccccccccccccGGEEEEEEEEEEEEEEEEEDDDDDDDDDDDDDDDJJJJJJJ   
+S3:    |            cchhhhhccccccc   EEEEEEEEEEEEEEEEEDDDDDDDDDDDDDDD          
+S3:    |             hhhhhhhhccc  RRRREEEEEEEEEEEEEEEEDDDDDDDDwwwwDDsssss      
+S3:    |             hhhhhhhh     RRRRREEEEEEEEEEEEEEEEDDDDDDDwwwwDsssssss     
+S3:    |              hhhhhh            EEEEEEEEEEEEEddddDDDDDDDD  sssssss     
+S3:  0 +                                    EEEEE                    ss        
+S3:     +---------+---------+---------+---------+---------+---------+---------+
+S3:     0        10        20        30        40        50        60        70
+
+
+S4: rainfall amount = 120.0
+S4: tree R has stress factor 13.03 and dies next
+S4: tree w has stress factor 11.66 and dies next
+S4: tree Q has stress factor 8.57 and dies next
+S4: tree C has stress factor 6.27 and dies next
+S4: tree g has stress factor 4.84 and dies next
+S4: tree h has stress factor 4.69 and dies next
+S4: tree N has stress factor 3.90 and dies next
+S4: tree J has stress factor 3.79 and dies next
+S4: tree V has stress factor 3.53 and dies next
+S4: tree n has stress factor 2.06 and dies next
+S4: tree s has stress factor 1.90 and dies next
+S4: tree D has stress factor 1.62 and dies next
+S4: tree B has stress factor 1.60 and dies next
+S4: tree c has stress factor 1.47 and dies next
+S4: tree v has stress factor 1.07 and dies next
+
+S4: 60 +                                                                       
+S4:    |                                                                       
+S4:    |                                               eeeeeee                 
+S4:    |                                          eeeeeeeeeeeeeeeee            
+S4:    |                                       eeeeeeeeeeeeeeeeeeeeeee         
+S4: 50 +                                     eeeeeeeeeeeeeeeeeeeeeeeeeee       
+S4:    |                                   eeeeeeeeeeeeeeeeeeeeeeeeeeeeeee     
+S4:    |                                  eeeeAAAeeeeeeeeeeeeeeeeeeeeeeeeee    
+S4:    |                                  eAAAAAAAeeeeeeeeeeeeeeeeeeeeeeeeee   
+S4:    |                                 AAAAAAAAAAAeeeeeeeeeeeeeeeeeeeeeeee   
+S4: 40 +                                AAAAAAAAAAAAAeeeeeeeeeeeeeeeeeeeeeee   
+S4:    |                               AAAAAAAAAAAAAAAeeeeeeeeeeeeeeeeeeeeee   
+S4:    |                               AAAAAAAAAAAAAAAAeeeeeeeeeeeeeeeeeeeee   
+S4:    |                              AAAAAAAAAAAAAAAAAAAeeeeeeeeeeeeeeeeeee   
+S4:    |                            GGGGAAAAAAAAAAAAAAAAAAeeeeeeeeeeeeeeeee    
+S4: 30 +                          GGGGGGGGGAAAAAAAAAAAAAAAAeeeeeeeeeeeeeee     
+S4:    |                        GGGGGGGGGGGGGGGAAAAAAAAAAAAAeeeeeeeeeeeee      
+S4:    |                       GGGGGGGGGGGGGGGGGGGGAAAAddddddddddddddeee       
+S4:    |                       GGGGGGGGGGGGGGGGGGGGGdddddddddddddddddd         
+S4:    |                      GGGGGGGGGGGGGGGGGGGGGdddddddddddddddddddd        
+S4: 20 +                      GGGGGGGGGGGGGGGGGGGGddddddddddddddddddddd        
+S4:    |                      GGGGGGGGGGGGGGGGGGGGdddddddddddddddddddddd       
+S4:    |                       GGGGGGGGGGGGGGGGGGddddddddddddddddddddddd       
+S4:    |                        GGGGGGGGEEEEEEEEEEEdddddddddddddddddddd        
+S4:    |                         GGGGEEEEEEEEEEEEEEEddddddddddddddddddd        
+S4: 10 +                           GGEEEEEEEEEEEEEEEEEdddddddddddddddd         
+S4:    |                             EEEEEEEEEEEEEEEEEEEdddddddddddd           
+S4:    |                             EEEEEEEEEEEEEEEEEEEddddddddddd            
+S4:    |                              EEEEEEEEEEEEEEEEEddddddddd               
+S4:    |                                EEEEEEEEEEEEEdddddd                    
+S4:  0 +                                    EEEEE                              
+S4:     +---------+---------+---------+---------+---------+---------+---------+
+S4:     0        10        20        30        40        50        60        70
+
