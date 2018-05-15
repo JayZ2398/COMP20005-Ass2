@@ -1,0 +1,9 @@
+#!/bin/bash
+
+for output in "Custom Outputs/"*
+do
+	#echo name = ${output##*/}
+	echo $output
+	echo "Sample Outputs/${output##*/your-}"
+	mydiff "$output" "Sample Outputs/"${output##*/your-}
+done

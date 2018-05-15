@@ -1,0 +1,85 @@
+
+S1: total data lines   =     6 trees
+S1: total water needed = 0.118 megaliters per year
+
+S2: tree R is in conflict with D 
+S2: tree B is in conflict with K D 
+S2: tree K is in conflict with B q D 
+S2: tree q is in conflict with K D 
+S2: tree m is in conflict with 
+S2: tree D is in conflict with R B K q 
+
+S3: 60 +                                                                       
+S3:    |                                                                       
+S3:    |                                                                       
+S3:    |                                                                       
+S3:    |                                                                       
+S3: 50 +                                                                       
+S3:    |                     qqqqqqqqqqqqqqq                                   
+S3:    |                  qqqqqqqqqqqqqqqqqqqqq                                
+S3:    |               qqqqqqqqqqqqqqqqqqqqqqqqqq                              
+S3:    |              qqqqqqqqqqqqqqqqqqqqqqqqqqqqq                            
+S3: 40 +             qqqqqqqqqqqqqqqqqqqqqqqqqqqKKKKKKKKK                      
+S3:    |            qqqqqqqqqqqqqqqqqqqqqqqqqqqKKKKKKKKKKKKK                   
+S3:    |           qqqqqqqqqqqqqqqqqqqqqqqqqqqKKKKKKKKKKKKKKKK                 
+S3:    |           qqqqqqqqqqqqqqqqqqqqqqqqqqKKKKKKKKKKKKKKKKKK                
+S3:    |           qqqqqqqqqqqqqqqqqqqqqqqqqKKKKKKKKKKKKKKKKKKKK               
+S3: 30 +           qqqqqqqqqqqqqqqqqqqqqqqqKKKKKKKKKKKKKKKKKKKKKK              
+S3:    |           qqqqqqqqqqqqqqqqqqqqqqqKKKKKKKKKKKKKKKKKKKKKKK              
+S3:    |            qqqqqqqqqqqqqqqqqqqqqKKKKKKKKKKKKKKKKKKKKKKKKK             
+S3:    |             qqqqqqqqqqqqqqqqqqqKKKKKKKKKKKKKKKKKKKKKKKKKK             
+S3:    |              qqqqqqqqqqqqqqqqqKKKKKKKKKKKKKKKKKKKKKKKKKK              
+S3: 20 +     mmmmm      qqqqqqqqqqqqqDDDDDDKKKKKKKKKKKKKKKKKKKKKK              
+S3:    |   mmmmmmmmmm     qqqqqqqqqDDDDDDDDDDDDDDKKKKKKKKKKKKKKK               
+S3:    | mmmmmmmmmmmmm       qqqqqDDDDDDDDDDDDDDDDDDDDDKKKKKKK                 
+S3:    | mmmmmmmmmmmmmm          DDDDDDDDDDDDDDDDDDDDDDDKKKKK                  
+S3:    | mmmmmmmmmmmmmm          DDDDDDDDDDDDDDDDDDDBBBBBBB                    
+S3: 10 +  mmmmmmmmmmmm           DDDDDDDDDDDDDDDDDBBBBBBBBBB                   
+S3:    |    mmmmmmmm              DDDDDDDDDDDDDDDDBBBBBBBBBB                   
+S3:    |                           DDDDDDDDDDDDDDDBBBBBBBBBB                   
+S3:    |                            DDDDRRRRDDDDDDDDBBBBBBB                    
+S3:    |                               DDRRDDDDDDD                             
+S3:  0 +                                                                       
+S3:     +---------+---------+---------+---------+---------+---------+---------+
+S3:     0        10        20        30        40        50        60        70
+
+
+S4: rainfall amount = 120.0
+S4: tree B has stress factor 2.51 and dies next
+S4: tree R has stress factor 1.86 and dies next
+S4: tree m has stress factor 1.28 and dies next
+
+S4: 60 +                                                                       
+S4:    |                                                                       
+S4:    |                                                                       
+S4:    |                                                                       
+S4:    |                                                                       
+S4: 50 +                                                                       
+S4:    |                     qqqqqqqqqqqqqqq                                   
+S4:    |                  qqqqqqqqqqqqqqqqqqqqq                                
+S4:    |               qqqqqqqqqqqqqqqqqqqqqqqqqq                              
+S4:    |              qqqqqqqqqqqqqqqqqqqqqqqqqqqqq                            
+S4: 40 +             qqqqqqqqqqqqqqqqqqqqqqqqqqqKKKKKKKKK                      
+S4:    |            qqqqqqqqqqqqqqqqqqqqqqqqqqqKKKKKKKKKKKKK                   
+S4:    |           qqqqqqqqqqqqqqqqqqqqqqqqqqqKKKKKKKKKKKKKKKK                 
+S4:    |           qqqqqqqqqqqqqqqqqqqqqqqqqqKKKKKKKKKKKKKKKKKK                
+S4:    |           qqqqqqqqqqqqqqqqqqqqqqqqqKKKKKKKKKKKKKKKKKKKK               
+S4: 30 +           qqqqqqqqqqqqqqqqqqqqqqqqKKKKKKKKKKKKKKKKKKKKKK              
+S4:    |           qqqqqqqqqqqqqqqqqqqqqqqKKKKKKKKKKKKKKKKKKKKKKK              
+S4:    |            qqqqqqqqqqqqqqqqqqqqqKKKKKKKKKKKKKKKKKKKKKKKKK             
+S4:    |             qqqqqqqqqqqqqqqqqqqKKKKKKKKKKKKKKKKKKKKKKKKKK             
+S4:    |              qqqqqqqqqqqqqqqqqKKKKKKKKKKKKKKKKKKKKKKKKKK              
+S4: 20 +                qqqqqqqqqqqqqDDDDDDKKKKKKKKKKKKKKKKKKKKKK              
+S4:    |                  qqqqqqqqqDDDDDDDDDDDDDDKKKKKKKKKKKKKKK               
+S4:    |                     qqqqqDDDDDDDDDDDDDDDDDDDDDKKKKKKK                 
+S4:    |                         DDDDDDDDDDDDDDDDDDDDDDDKKKKK                  
+S4:    |                         DDDDDDDDDDDDDDDDDDDDDDDKK                     
+S4: 10 +                         DDDDDDDDDDDDDDDDDDDDDDD                       
+S4:    |                          DDDDDDDDDDDDDDDDDDDDD                        
+S4:    |                           DDDDDDDDDDDDDDDDDDD                         
+S4:    |                            DDDDDDDDDDDDDDDDD                          
+S4:    |                               DDDDDDDDDDD                             
+S4:  0 +                                                                       
+S4:     +---------+---------+---------+---------+---------+---------+---------+
+S4:     0        10        20        30        40        50        60        70
+

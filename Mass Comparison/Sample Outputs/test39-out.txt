@@ -1,0 +1,98 @@
+
+S1: total data lines   =    15 trees
+S1: total water needed = 0.218 megaliters per year
+
+S2: tree F is in conflict with 
+S2: tree g is in conflict with c 
+S2: tree A is in conflict with P C c 
+S2: tree j is in conflict with Y s 
+S2: tree P is in conflict with A C c 
+S2: tree Y is in conflict with j s 
+S2: tree S is in conflict with k 
+S2: tree p is in conflict with 
+S2: tree J is in conflict with W 
+S2: tree L is in conflict with 
+S2: tree W is in conflict with J 
+S2: tree s is in conflict with j Y 
+S2: tree C is in conflict with A P c 
+S2: tree c is in conflict with g A P C 
+S2: tree k is in conflict with S 
+
+S3: 60 +                                                                       
+S3:    |                                                                       
+S3:    |              LLLLLL                                     ppppp         
+S3:    |              LLLLLLL             AA                     ppppp         
+S3:    |               LLLLL          AAAAAAAAAA                               
+S3: 50 +                            AAAAAAAAAAAAAA               ggggggg       
+S3:    |           FFFFF           AAAAAAAAAAAAAAAA    ccccccccggggggggggg     
+S3:    |         FFFFFFFF          AAAAAAAAAAAAAAAA cccccccccccggggggggggg     
+S3:    |          FFFFFFF           AAAAAAAAAAAAAACccccccccccccggggggggggg     
+S3:    |   JJ      FFFFF          PPAAAAAAAAAAAAAACccccccccccccccgggggggc      
+S3: 40 +  JJJJ                PPPPPPPCAAAAAAAAAACCCCcccccccccccccccccccccc     
+S3:    |    WWWWWWWW        PPPPPPPPPPCCCCCCCCCCCCCCCcccccccccccccccccccccc    
+S3:    |  WWWWWWWWWWWW    PPPPPPPPPPPPPCCCCCCCCCCCCCCcccccccccccccccccccccc    
+S3:    |  WWWWWWWWWWWW   PPPPPPPPPPPPPPPCCCCCCCCCCCCCCccccccccccccccccccccc    
+S3:    |  WWWWWWWWWWWW  PPPPPPPPPPPPPPPPPCCCCCCCCCCCCCccccccccccccccccccccc    
+S3: 30 +   WWWWWWWWWW   PPPPPPPPPPPPPPPPPPPCCCCCCCCCCCCccccccccccccccccccc     
+S3:    |     WWWWW     PPPPPPPPPPPPPPPPPPPPPCCCCCCCCCCCCccccccccccccccccc      
+S3:    |               PPPPPPPPPPPPPPPPPPPPPPCCCCCCCCCCCcccccccccccccccc       
+S3:    |               PPPPPPPPPPPPPPPPPPPPPPPCCCCCCCCCCCccccccccccccc         
+S3:    |                PPPPPPPPPPPPPPPPPPPPPPPCCCCCCCCCCccccccccc             
+S3: 20 +                 PPPPPPPPPPPPPPPPPPPPPPPCCCCCCCCC     YYYYY            
+S3:    |                  PPPPPPPPPPPPPPPPPPPPPPPCCCCC    YYYYYYYYYYYYY        
+S3:    |                   PPPPPPPPPPPPPPPPPPPPPPPPP    YYYYYYYYYYYYYYYYY      
+S3:    |                     PPPPPPPPPPPPPPPPPPPPP     YYYYYYYYYYYYYYYYYYY     
+S3:    |                        PPPPPPPPPPPPPPP       YYYYYYYYYYYYYYYYYYYY     
+S3: 10 +            kkkkkkk                           YYYYYjYYYYYYYYYYYYYYY    
+S3:    |           kkkkkkkkk                          YYYjjjjjjYYYYYYYYYYY     
+S3:    |           kkkSSSSS                            YYjjjjjjjjjYYYYYYYY     
+S3:    |             SSSSSS                             YjjjjjjjjjYYYYYY       
+S3:    |               SS                               ssssjjjjYYYYYY         
+S3:  0 +                                                 sss                   
+S3:     +---------+---------+---------+---------+---------+---------+---------+
+S3:     0        10        20        30        40        50        60        70
+
+
+S4: rainfall amount = 120.0
+S4: tree J has stress factor 18.27 and dies next
+S4: tree S has stress factor 9.60 and dies next
+S4: tree p has stress factor 9.29 and dies next
+S4: tree F has stress factor 2.98 and dies next
+S4: tree k has stress factor 2.14 and dies next
+S4: tree g has stress factor 1.79 and dies next
+S4: tree s has stress factor 1.45 and dies next
+
+S4: 60 +                                                                       
+S4:    |                                                                       
+S4:    |              LLLLLL                                                   
+S4:    |              LLLLLLL             AA                                   
+S4:    |               LLLLL          AAAAAAAAAA                               
+S4: 50 +                            AAAAAAAAAAAAAA                             
+S4:    |                           AAAAAAAAAAAAAAAA    cccccccccccc            
+S4:    |                           AAAAAAAAAAAAAAAA cccccccccccccccccc         
+S4:    |                            AAAAAAAAAAAAAACccccccccccccccccccccc       
+S4:    |                          PPAAAAAAAAAAAAAACcccccccccccccccccccccc      
+S4: 40 +                      PPPPPPPCAAAAAAAAAACCCCcccccccccccccccccccccc     
+S4:    |    WWWWWWWW        PPPPPPPPPPCCCCCCCCCCCCCCCcccccccccccccccccccccc    
+S4:    |  WWWWWWWWWWWW    PPPPPPPPPPPPPCCCCCCCCCCCCCCcccccccccccccccccccccc    
+S4:    |  WWWWWWWWWWWW   PPPPPPPPPPPPPPPCCCCCCCCCCCCCCccccccccccccccccccccc    
+S4:    |  WWWWWWWWWWWW  PPPPPPPPPPPPPPPPPCCCCCCCCCCCCCccccccccccccccccccccc    
+S4: 30 +   WWWWWWWWWW   PPPPPPPPPPPPPPPPPPPCCCCCCCCCCCCccccccccccccccccccc     
+S4:    |     WWWWW     PPPPPPPPPPPPPPPPPPPPPCCCCCCCCCCCCccccccccccccccccc      
+S4:    |               PPPPPPPPPPPPPPPPPPPPPPCCCCCCCCCCCcccccccccccccccc       
+S4:    |               PPPPPPPPPPPPPPPPPPPPPPPCCCCCCCCCCCccccccccccccc         
+S4:    |                PPPPPPPPPPPPPPPPPPPPPPPCCCCCCCCCCccccccccc             
+S4: 20 +                 PPPPPPPPPPPPPPPPPPPPPPPCCCCCCCCC     YYYYY            
+S4:    |                  PPPPPPPPPPPPPPPPPPPPPPPCCCCC    YYYYYYYYYYYYY        
+S4:    |                   PPPPPPPPPPPPPPPPPPPPPPPPP    YYYYYYYYYYYYYYYYY      
+S4:    |                     PPPPPPPPPPPPPPPPPPPPP     YYYYYYYYYYYYYYYYYYY     
+S4:    |                        PPPPPPPPPPPPPPP       YYYYYYYYYYYYYYYYYYYY     
+S4: 10 +                                              YYYYYjYYYYYYYYYYYYYYY    
+S4:    |                                              YYYjjjjjjYYYYYYYYYYY     
+S4:    |                                               YYjjjjjjjjjYYYYYYYY     
+S4:    |                                                YjjjjjjjjjYYYYYY       
+S4:    |                                                  YjjjjjYYYYYY         
+S4:  0 +                                                                       
+S4:     +---------+---------+---------+---------+---------+---------+---------+
+S4:     0        10        20        30        40        50        60        70
+

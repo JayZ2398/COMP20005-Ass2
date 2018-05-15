@@ -1,0 +1,77 @@
+
+S1: total data lines   =     1 trees
+S1: total water needed = 0.025 megaliters per year
+
+S2: tree F is in conflict with 
+
+S3: 60 +                                                                       
+S3:    |                                                                       
+S3:    |                                                                       
+S3:    |                                                                       
+S3:    |             FFFFFFFFFFFF                                              
+S3: 50 +           FFFFFFFFFFFFFFFF                                            
+S3:    |          FFFFFFFFFFFFFFFFFF                                           
+S3:    |          FFFFFFFFFFFFFFFFFF                                           
+S3:    |          FFFFFFFFFFFFFFFFFF                                           
+S3:    |          FFFFFFFFFFFFFFFFFF                                           
+S3: 40 +           FFFFFFFFFFFFFFFF                                            
+S3:    |            FFFFFFFFFFFFFF                                             
+S3:    |               FFFFFFFF                                                
+S3:    |                                                                       
+S3:    |                                                                       
+S3: 30 +                                                                       
+S3:    |                                                                       
+S3:    |                                                                       
+S3:    |                                                                       
+S3:    |                                                                       
+S3: 20 +                                                                       
+S3:    |                                                                       
+S3:    |                                                                       
+S3:    |                                                                       
+S3:    |                                                                       
+S3: 10 +                                                                       
+S3:    |                                                                       
+S3:    |                                                                       
+S3:    |                                                                       
+S3:    |                                                                       
+S3:  0 +                                                                       
+S3:     +---------+---------+---------+---------+---------+---------+---------+
+S3:     0        10        20        30        40        50        60        70
+
+
+S4: rainfall amount = 120.0
+
+S4: 60 +                                                                       
+S4:    |                                                                       
+S4:    |                                                                       
+S4:    |                                                                       
+S4:    |             FFFFFFFFFFFF                                              
+S4: 50 +           FFFFFFFFFFFFFFFF                                            
+S4:    |          FFFFFFFFFFFFFFFFFF                                           
+S4:    |          FFFFFFFFFFFFFFFFFF                                           
+S4:    |          FFFFFFFFFFFFFFFFFF                                           
+S4:    |          FFFFFFFFFFFFFFFFFF                                           
+S4: 40 +           FFFFFFFFFFFFFFFF                                            
+S4:    |            FFFFFFFFFFFFFF                                             
+S4:    |               FFFFFFFF                                                
+S4:    |                                                                       
+S4:    |                                                                       
+S4: 30 +                                                                       
+S4:    |                                                                       
+S4:    |                                                                       
+S4:    |                                                                       
+S4:    |                                                                       
+S4: 20 +                                                                       
+S4:    |                                                                       
+S4:    |                                                                       
+S4:    |                                                                       
+S4:    |                                                                       
+S4: 10 +                                                                       
+S4:    |                                                                       
+S4:    |                                                                       
+S4:    |                                                                       
+S4:    |                                                                       
+S4:  0 +                                                                       
+S4:     +---------+---------+---------+---------+---------+---------+---------+
+S4:     0        10        20        30        40        50        60        70
+

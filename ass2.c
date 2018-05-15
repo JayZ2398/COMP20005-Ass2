@@ -2,7 +2,7 @@
 COMP20005 2018 S1
 Assignment 2
 Jack Zezula
-04/05/2018 - 10/05/2018
+04/05/2018 - 15/05/2018
 */
 // programming is fun
 
@@ -16,9 +16,9 @@ Jack Zezula
 #define FALSE 0
 #define MEGA 1.0e6
 
-#define REG_HEIGHT 60
-#define GRID_HEIGHT REG_HEIGHT/CELL_HEIGHT
+#define REGION_HEIGHT 60
 #define GRID_WIDTH 70
+#define GRID_HEIGHT REGION_HEIGHT/CELL_HEIGHT
 #define CELL_HEIGHT 2
 #define CELL_WIDTH 1
 #define CELL_AREA CELL_HEIGHT * CELL_WIDTH
@@ -159,18 +159,13 @@ void initialise_tree(Tree *tree) {
 }
 
 void find_conflicting_trees(Forest forest, int num_trees) {
-	int processed, compared;
 	double distance, tree_rad, other_rad;
-
-	// Declare pointers to trees in forest
-	Tree *tree = forest, *other = NULL;
+	Tree *tree = NULL, *other = NULL;
 
 	// Iterate through trees in forest to find conflicts for each
-	for (processed = 0; processed < num_trees; processed++) {
-		tree = &forest[processed];
-		// For each processed tree, compare every other tree for distance
-		for (compared = 0; compared < num_trees; compared++) {
-			other = &forest[compared];
+	for (tree = forest; tree < forest + num_trees; tree++) {
+		// For each tree, compare every other tree
+		for (other = forest; other < forest + num_trees; other++) {
 			// If compared trees are the same, skip to next tree
 			if (tree->label == other->label) {
 				continue;
@@ -248,15 +243,13 @@ void calculate_grid(Grid grid, Forest forest, int num_trees) {
 
 char cell_tree(double x_cent, double y_cent, Forest forest, int num_trees) {
 	double min_dist, dist_to_tree;
-	int processed;
 	char cell_label = ' ';
 	Tree *tree = NULL, *cell_tree = NULL;
 
 	// Search forest for closest tree with catchment over cell
 	// Default distance is max distance possible within grid
-	min_dist = distance(0, 0, GRID_WIDTH, REG_HEIGHT);
-	for (processed = 0; processed < num_trees; processed++) {
-		tree = &forest[processed];
+	min_dist = distance(0, 0, GRID_WIDTH, REGION_HEIGHT);
+	for (tree = forest; tree < forest + num_trees; tree++) {
 		dist_to_tree = distance(x_cent, y_cent, tree->xloc, tree->yloc);
 
 		// Update cell label if tree has catchment, is closest yet, and still alive
@@ -328,16 +321,14 @@ void stage1_output(Forest forest, int num_trees, int total_water) {
 }
 
 void stage2_output(Forest forest, int num_trees) {
-	int processed, conf_tree, conflicts;
+	int conf_tree, conflicts;
 	Tree *tree = NULL;
 
 	// Process all trees stored in data
-	for (processed = 0; processed < num_trees; tree++, processed++) {
-		// Use pointer to tree for easy assignment of tree properties
-		tree = &forest[processed];
-		// Print all labels stored in tree's array of conflicts
+	for (tree = forest; tree < forest + num_trees; tree++) {
 		conflicts = tree->num_conflicts;
 		printf("S2: tree %c is in conflict with ", tree->label);
+		// Print all labels stored in tree's array of conflicts
 		for(conf_tree = 0; conf_tree < conflicts; conf_tree++) {
 			printf("%c ", tree->conflicts[conf_tree]);
 		}
@@ -353,18 +344,20 @@ void stage3_output(Grid grid, Forest forest, int num_trees) {
 }
 
 void stage4_output(Grid grid, Forest forest, int num_trees, double rainfall) {
-	int processed, tree_has_died = TRUE;
+	int tree_has_died = TRUE;
 	double stress_factor, max_stress_factor;
 	Tree* tree = NULL, *dead_tree = NULL;
 
 	printf("S4: rainfall amount = %.1f\n", rainfall);
+	// remove && rainfall - rainfall CAN be zero
+	//
 	while (tree_has_died && rainfall) {
 		// Set default conditions
 		tree_has_died = FALSE;
 		dead_tree = NULL;
 		max_stress_factor = 1.0;
-		for (processed = 0; processed < num_trees; processed++) {
-			tree = &forest[processed];
+		// Loop through pointers to trees in forest
+		for (tree = forest; tree < forest + num_trees; tree++) {
 			// Find stress factor for tree, and reset cells for next calculation
 			stress_factor = find_stress_factor(tree, rainfall);
 
@@ -372,6 +365,7 @@ void stage4_output(Grid grid, Forest forest, int num_trees, double rainfall) {
 			if (stress_factor > max_stress_factor && tree->is_alive) {
 				tree_has_died = TRUE;
 				max_stress_factor = stress_factor;
+				// Save pointer to tree with highest stress factor
 				dead_tree = tree;
 			}
 		}
