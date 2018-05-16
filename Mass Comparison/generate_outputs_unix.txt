@@ -1,0 +1,18 @@
+#!/bin/bash
+
+pwd
+gcc -Wall mydiff.c -o mydiff
+
+cd ..
+gcc -Wall ass2.c -o ass2
+cp ass2 "Mass Comparison/"
+cd "Mass Comparison/"
+
+for input in "Custom Inputs/"*
+do	echo "Processing $input file..."
+	#echo name = $(basename "$input" | cut -d. -f1)
+	./ass2 < "$input" 120 > "Custom Outputs/your-$(basename "$input" | cut -d. -f1)-out.txt"
+	echo Output Custom Outputs/your-$(basename "$input" | cut -d. -f1)-out.txt..
+done
+
+echo "Done creating your program's outputs!"

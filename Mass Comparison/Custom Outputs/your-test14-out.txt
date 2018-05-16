@@ -1,0 +1,93 @@
+
+S1: total data lines   =     9 trees
+S1: total water needed = 0.156 megaliters per year
+
+S2: tree t is in conflict with 
+S2: tree E is in conflict with I 
+S2: tree e is in conflict with 
+S2: tree V is in conflict with 
+S2: tree L is in conflict with 
+S2: tree b is in conflict with 
+S2: tree s is in conflict with 
+S2: tree j is in conflict with 
+S2: tree I is in conflict with E 
+
+S3: 60 +                                                                       
+S3:    |                                                                       
+S3:    |                    ssssss                                             
+S3:    |                  ssssssssss   jjjj                                    
+S3:    |                  ssssssssss   jjjj            LLLLL                   
+S3: 50 +                  ssssssssss                 LLLLLLLL                  
+S3:    |                    ssssss                   LLLLLLLLL                 
+S3:    |                                  EEE        LLLLLLLL        tttt      
+S3:    |                            EEEEEEEEEEEEEEE    LLLL          tttt      
+S3:    |                          EEEEEEEEEEEEEEEEEEE                          
+S3: 40 +                        EEEEEEEEEEEEEEEEEEEEEEE                        
+S3:    |                       EEEEEEEEEEEEEEEEEEEEEEEEE                       
+S3:    |                      EEEEEEEEEEEEEEEEEEEEEEEEEEE                      
+S3:    |                      EEEEEEEEEEEEEEEEEEEEEEEEEEE                      
+S3:    |                      EEEEEEEEEEEEEEEEEEEEEEEEEEE                      
+S3: 30 +                      EEEEEEEEEEEEEEEEEEEEEEEEEEE                      
+S3:    |                      EEEEEEEEEEEEEEEEEEEEEEEEEEE                      
+S3:    |                       EEEEEEEEEEEEEEEEEEEEEEEEE                       
+S3:    |                        EEEEEEEEEEEEEEEEIIIIIIE                        
+S3:    |                          EEEEEEEEEEEEIIIIIIIIII                       
+S3: 20 +                             EEEEEEEEEIIIIIIIIIII                      
+S3:    |                                      IIIIIIIIIII                      
+S3:    |                                       IIIIIIIII                       
+S3:    |                                          II                           
+S3:    |                              eeeeee                                   
+S3: 10 +                             eeeeeeeee                                 
+S3:    |                            eeeeeeeeeee           VVVVV                
+S3:    |                            eeeeeeeeee           VVVVVVV               
+S3:    |     bbbbb                    eeeeeee             VVVVVV               
+S3:    |      bbb                                                              
+S3:  0 +                                                                       
+S3:     +---------+---------+---------+---------+---------+---------+---------+
+S3:     0        10        20        30        40        50        60        70
+
+
+S4: rainfall amount = 120.0
+S4: tree t has stress factor 11.56 and dies next
+S4: tree V has stress factor 6.09 and dies next
+S4: tree b has stress factor 3.93 and dies next
+S4: tree L has stress factor 3.93 and dies next
+S4: tree j has stress factor 3.54 and dies next
+S4: tree I has stress factor 2.59 and dies next
+S4: tree e has stress factor 1.58 and dies next
+S4: tree s has stress factor 1.02 and dies next
+
+S4: 60 +                                                                       
+S4:    |                                                                       
+S4:    |                                                                       
+S4:    |                                                                       
+S4:    |                                                                       
+S4: 50 +                                                                       
+S4:    |                                                                       
+S4:    |                                  EEE                                  
+S4:    |                            EEEEEEEEEEEEEEE                            
+S4:    |                          EEEEEEEEEEEEEEEEEEE                          
+S4: 40 +                        EEEEEEEEEEEEEEEEEEEEEEE                        
+S4:    |                       EEEEEEEEEEEEEEEEEEEEEEEEE                       
+S4:    |                      EEEEEEEEEEEEEEEEEEEEEEEEEEE                      
+S4:    |                      EEEEEEEEEEEEEEEEEEEEEEEEEEE                      
+S4:    |                      EEEEEEEEEEEEEEEEEEEEEEEEEEE                      
+S4: 30 +                      EEEEEEEEEEEEEEEEEEEEEEEEEEE                      
+S4:    |                      EEEEEEEEEEEEEEEEEEEEEEEEEEE                      
+S4:    |                       EEEEEEEEEEEEEEEEEEEEEEEEE                       
+S4:    |                        EEEEEEEEEEEEEEEEEEEEEEE                        
+S4:    |                          EEEEEEEEEEEEEEEEEEE                          
+S4: 20 +                             EEEEEEEEEEEEE                             
+S4:    |                                                                       
+S4:    |                                                                       
+S4:    |                                                                       
+S4:    |                                                                       
+S4: 10 +                                                                       
+S4:    |                                                                       
+S4:    |                                                                       
+S4:    |                                                                       
+S4:    |                                                                       
+S4:  0 +                                                                       
+S4:     +---------+---------+---------+---------+---------+---------+---------+
+S4:     0        10        20        30        40        50        60        70
+
