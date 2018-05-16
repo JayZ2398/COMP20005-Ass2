@@ -1,0 +1,80 @@
+
+S1: total data lines   =     3 trees
+S1: total water needed = 0.145 megaliters per year
+
+S2: tree A is in conflict with C
+S2: tree B is in conflict with C
+S2: tree C is in conflict with A B
+
+S3: 60 +
+S3:    |
+S3:    |                                   BBBBBBBBBB
+S3:    |                                BBBBBBBBBBBBBBBB
+S3:    |                              BBBBBBBBBBBBBBBBBBBB
+S3: 50 +                            BBBBBBBBBBBBBBBBBBBBBBBB
+S3:    |                            BBBBBBBBBBBBBBBBBBBBBBBB
+S3:    |                           BBBBBBBBBBBBBBBBBBBBBBBBBB
+S3:    |                           BBBBBBBBBBBBBBBBBBBBBBBBBB
+S3:    |                           BBBBBBBBBBBBBBBBBBBBBBBBBB
+S3: 40 +                            BBBBBBBBBBBBBBBBBBBBBBBB
+S3:    |               AAAAAAAAAA   BBBBBBBBBBBBBBBBBBBBBBBB
+S3:    |           AAAAAAAAAAAAAAAAAA BBBBBBBBBBBBBBBBBBBB
+S3:    |         AAAAAAAAAAAAAAAAAAAAAA BBBBBBBBBBBBBBBB
+S3:    |       AAAAAAAAAAAAAAAAAAAAAAAAAA  BBBBBBBBBB
+S3: 30 +      AAAAAAAAAAAAAAAAAAAAAAAAAAAA CCCCCCCCCC
+S3:    |      AAAAAAAAAAAAAAAAAAAAAAAAAAACCCCCCCCCCCCCC
+S3:    |     AAAAAAAAAAAAAAAAAAAAAAAAAAACCCCCCCCCCCCCCCC
+S3:    |     AAAAAAAAAAAAAAAAAAAAAAAAAAACCCCCCCCCCCCCCCC
+S3:    |     AAAAAAAAAAAAAAAAAAAAAAAAAAACCCCCCCCCCCCCCCC
+S3: 20 +      AAAAAAAAAAAAAAAAAAAAAAAAAAACCCCCCCCCCCCCC
+S3:    |      AAAAAAAAAAAAAAAAAAAAAAAAAAAA CCCCCCCCCC
+S3:    |       AAAAAAAAAAAAAAAAAAAAAAAAAA
+S3:    |         AAAAAAAAAAAAAAAAAAAAAA
+S3:    |           AAAAAAAAAAAAAAAAAA
+S3: 10 +               AAAAAAAAAA
+S3:    |
+S3:    |
+S3:    |
+S3:    |
+S3:  0 +
+S3:     +---------+---------+---------+---------+---------+---------+---------+
+S3:     0        10        20        30        40        50        60        70
+
+
+S4: rainfall amount = 200.0
+S4: tree C has stress factor 1.04 and dies next
+
+S4: 60 +
+S4:    |
+S4:    |                                   BBBBBBBBBB
+S4:    |                                BBBBBBBBBBBBBBBB
+S4:    |                              BBBBBBBBBBBBBBBBBBBB
+S4: 50 +                            BBBBBBBBBBBBBBBBBBBBBBBB
+S4:    |                            BBBBBBBBBBBBBBBBBBBBBBBB
+S4:    |                           BBBBBBBBBBBBBBBBBBBBBBBBBB
+S4:    |                           BBBBBBBBBBBBBBBBBBBBBBBBBB
+S4:    |                           BBBBBBBBBBBBBBBBBBBBBBBBBB
+S4: 40 +                            BBBBBBBBBBBBBBBBBBBBBBBB
+S4:    |               AAAAAAAAAA   BBBBBBBBBBBBBBBBBBBBBBBB
+S4:    |           AAAAAAAAAAAAAAAAAA BBBBBBBBBBBBBBBBBBBB
+S4:    |         AAAAAAAAAAAAAAAAAAAAAA BBBBBBBBBBBBBBBB
+S4:    |       AAAAAAAAAAAAAAAAAAAAAAAAAA  BBBBBBBBBB
+S4: 30 +      AAAAAAAAAAAAAAAAAAAAAAAAAAAA
+S4:    |      AAAAAAAAAAAAAAAAAAAAAAAAAAAA
+S4:    |     AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+S4:    |     AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+S4:    |     AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+S4: 20 +      AAAAAAAAAAAAAAAAAAAAAAAAAAAA
+S4:    |      AAAAAAAAAAAAAAAAAAAAAAAAAAAA
+S4:    |       AAAAAAAAAAAAAAAAAAAAAAAAAA
+S4:    |         AAAAAAAAAAAAAAAAAAAAAA
+S4:    |           AAAAAAAAAAAAAAAAAA
+S4: 10 +               AAAAAAAAAA
+S4:    |
+S4:    |
+S4:    |
+S4:    |
+S4:  0 +
+S4:     +---------+---------+---------+---------+---------+---------+---------+
+S4:     0        10        20        30        40        50        60        70
+

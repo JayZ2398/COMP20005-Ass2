@@ -1,0 +1,32 @@
+cd ..
+gcc -Wall -lm ass2.c -o ass2
+cp ass2 "Compare Outputs/"
+cd "Compare Outputs/"
+
+gcc -Wall mydiff.c -o mydiff
+cp mydiff Outputs
+
+ass2 < Inputs/test0.tsv 120 > Outputs/your-test0-120.txt
+ass2 < Inputs/test0.tsv 200 > Outputs/your-test0-200.txt
+ass2 < Inputs/test1.tsv 120 > Outputs/your-test1-120.txt
+ass2 < Inputs/test1.tsv 200 > Outputs/your-test1-200.txt
+ass2 < Inputs/test2.tsv 120 > Outputs/your-test2-120.txt
+ass2 < Inputs/test2.tsv 200 > Outputs/your-test2-200.txt
+
+cd Outputs
+echo test0 120
+./mydiff your-test0-120.txt test0-120-out.txt 
+echo test0 200
+./mydiff your-test0-200.txt test0-200-out.txt 
+
+echo test1 120
+./mydiff your-test1-120.txt test1-120-out.txt 
+echo test1 200
+./mydiff your-test1-200.txt test1-200-out.txt 
+
+echo test2 120
+./mydiff your-test2-120.txt test2-120-out.txt 
+echo test2 200
+./mydiff your-test2-200.txt test2-200-out.txt 
+
+echo END COMPARISON

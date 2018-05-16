@@ -1,0 +1,83 @@
+
+S1: total data lines   =     5 trees
+S1: total water needed = 0.113 megaliters per year
+
+S2: tree A is in conflict with G F
+S2: tree G is in conflict with A F
+S2: tree F is in conflict with A G C
+S2: tree C is in conflict with F
+S2: tree E is in conflict with
+
+S3: 60 +
+S3:    |
+S3:    |
+S3:    |
+S3:    |
+S3: 50 +
+S3:    |
+S3:    |
+S3:    |
+S3:    |
+S3: 40 +
+S3:    |
+S3:    |
+S3:    |                  GG
+S3:    |              GGGGGGGGGG
+S3: 30 +           AGGGGGGGGGGGGG
+S3:    |         AAAAAGGGGGGGGGGGG
+S3:    |       AAAAAAAAAGGGGGGGGFFFF      CCC
+S3:    |       AAAAAAAAAAAGGGFFFFFFFFFCCCCCCCCCCC
+S3:    |       AAAAAAAAAAAAFFFFFFFFFFFCCCCCCCCCCCC
+S3: 20 +       AAAAAAAAAAAAFFFFFFFFFFFCCCCCCCCCCCCC
+S3:    |        AAAAAAAAAAAFFFFFFFFFFCCCCCCCCCCCCCC
+S3:    |           AAAAAAAA  FFFFFF  CCCCCCCCCCCCC
+S3:    |                              CCCCCCCCCCC
+S3:    |             EEEEEEE             CCCCC
+S3: 10 +            EEEEEEEEE
+S3:    |             EEEEEEE
+S3:    |              EEEEE
+S3:    |
+S3:    |
+S3:  0 +
+S3:     +---------+---------+---------+---------+---------+---------+---------+
+S3:     0        10        20        30        40        50        60        70
+
+
+S4: rainfall amount = 200.0
+S4: tree F has stress factor 1.52 and dies next
+S4: tree E has stress factor 1.34 and dies next
+
+S4: 60 +
+S4:    |
+S4:    |
+S4:    |
+S4:    |
+S4: 50 +
+S4:    |
+S4:    |
+S4:    |
+S4:    |
+S4: 40 +
+S4:    |
+S4:    |
+S4:    |                  GG
+S4:    |              GGGGGGGGGG
+S4: 30 +           AGGGGGGGGGGGGG
+S4:    |         AAAAAGGGGGGGGGGGG
+S4:    |       AAAAAAAAAGGGGGGGGGG        CCC
+S4:    |       AAAAAAAAAAAGGGGGGG     CCCCCCCCCCC
+S4:    |       AAAAAAAAAAAAAGGGG     CCCCCCCCCCCCC
+S4: 20 +       AAAAAAAAAAAAAAA      CCCCCCCCCCCCCCC
+S4:    |        AAAAAAAAAAAAA       CCCCCCCCCCCCCCC
+S4:    |           AAAAAAAA          CCCCCCCCCCCCC
+S4:    |                              CCCCCCCCCCC
+S4:    |                                 CCCCC
+S4: 10 +
+S4:    |
+S4:    |
+S4:    |
+S4:    |
+S4:  0 +
+S4:     +---------+---------+---------+---------+---------+---------+---------+
+S4:     0        10        20        30        40        50        60        70
+
