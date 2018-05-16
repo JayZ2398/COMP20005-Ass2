@@ -200,6 +200,10 @@ double distance_between_trees(Tree* tree, Tree* other) {
 
 double find_stress_factor(Tree *tree, double rainfall) {
 	double stress_factor, water_needed, water_available;
+	// Special case for rainfall = 0.0
+	if (rainfall == 0.0) {
+		return 1.1;
+	}
 
 	// Find stress factor and reset tree catchment cells to zero
 	water_needed = tree->litres;
