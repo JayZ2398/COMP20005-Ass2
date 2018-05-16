@@ -9,9 +9,18 @@ and compare them to the outputs Tsz Kiu Pang and I both got from our programs (i
 Massive credit due to Tsz Kiu Pang and Anh Vo :)
 
 Instructions:
+<<<<<<< HEAD
 1. Place the 'Mass Comparison' folder in the same directory as your ass2.c.
 	- Make sure that you copy the entire folder, not the files inside it.
 2. Open your MinGW shell, and cd into the Mass Comparison folder.
+=======
+0. Make sure that your assignment is named ass2.c.
+1. Place the 'Mass Comparison' folder in the same directory as your ass2.c.
+	- Make sure that you copy the entire folder, not the files inside it.
+	- You don't need to compile your program - this script will do it for you.
+2. Open your MinGW shell, and cd into the Mass Comparison folder.
+	a) If you're on a Mac/dimefox/UNIX, add a _unix suffix to all the files from now on. I.e. compare_outputs_unix.txt.
+>>>>>>> a101729a0baa6dad43c0e0e5524d0343e9eee849
 3. Type
 	./generate_outputs.txt
 and hit enter. This will generate a bunch of outputs from your program called 'your-testX-out.txt'.
@@ -24,4 +33,12 @@ and hit enter. This will run Anh Vo's mydiff program and print out:
 		chmod +x ./generate_outputs.txt
 	and
 		chmox +x ./compare_outputs.txt
+<<<<<<< HEAD
 	then try the steps again.
+=======
+	then try the steps again.
+	
+Comparison Notes:
+- If you get a couple differences (say, 2 or 3 of the 100 files), this is normal!
+	- As doubles are handled differently between machines, there are some tiles that might be assigned to different trees.
+>>>>>>> a101729a0baa6dad43c0e0e5524d0343e9eee849
