@@ -83,22 +83,28 @@ main(int argc, char *argv[]) {
 	Forest forest;
 	Grid grid;
 
+	// Process input data and store tree information in array of struct
 	remove_headers();
 	read_data(forest, &num_trees, &total_water);
 	stage1_output(forest, num_trees, total_water);
 
+	// Find all conflicts between trees, and store in each tree's struct
 	find_conflicting_trees(forest, num_trees);
 	stage2_output(forest, num_trees);
 
+	// Prepare a 2d-array grid, then calculate catchment cells and print grid
 	initialise_grid(grid);
 	stage3_output(grid, forest, num_trees);
 
+	// Kill off trees with insufficient water, and print final map
 	stage4_output(grid, forest, num_trees, rainfall);
 
 	return 0;
 }
 
-// Input handlers
+/*=============================================================================
+Input handlers*/
+
 void read_data(Forest forest, int *num_trees, double *total_water) {
 	char label;
 	double xloc, yloc, litres, rootrad;
@@ -150,14 +156,17 @@ int	mygetchar() {
 	return c;
 }
 
-// Tree functions
+/*=============================================================================
+Tree functions*/
+
+// Initialise tree properties to default values
 void initialise_tree(Tree *tree) {
-	// Initialise tree properties to default values
 	tree->num_conflicts = 0;
 	tree->catchment_cells = 0;
 	tree->is_alive = TRUE;
 }
 
+// Find all conflicts in an array of tree struct, and store conflicts in structs
 void find_conflicting_trees(Forest forest, int num_trees) {
 	double distance, tree_rad, other_rad;
 	Tree *tree = NULL, *other = NULL;
@@ -191,6 +200,7 @@ double distance(double x1, double y1, double x2, double y2) {
 	return sqrt(a2 + b2);
 }
 
+// Pass two trees' coordinates to the distance function
 double distance_between_trees(Tree* tree, Tree* other) {
 	double x1, y1, x2, y2;
 	x1 = tree->xloc, y1 = tree->yloc;
@@ -198,26 +208,29 @@ double distance_between_trees(Tree* tree, Tree* other) {
 	return distance(x1, y1, x2, y2);
 }
 
+// Calculate the stress factor for a tree given annual rainfall (mL)
 double find_stress_factor(Tree *tree, double rainfall) {
 	double stress_factor, water_needed, water_available;
-	// Special case for rainfall = 0.0
-	if (rainfall == 0.0) {
-		return 1.1;
-	}
 
-	// Find stress factor and reset tree catchment cells to zero
 	water_needed = tree->litres;
 	water_available = CELL_AREA * rainfall * tree->catchment_cells;
+	// Special case for infinite stress factor
+	if (water_available == 0.0) {
+			return MEGA;
+	}
+	// Find stress factor and reset tree catchment cells to zero
 	stress_factor = water_needed / water_available;
 	tree->catchment_cells = 0;
 
 	return stress_factor;
 }
 
-// Grid functions
+/*=============================================================================
+Grid functions*/
+
+// Set top and right boundary of grid to blank (will never contain trees)
 void initialise_grid(Grid grid) {
 	int row, col;
-	// Set top and right boundary of grid to blank (will never contain trees)
 	for (row = 0; row <= GRID_HEIGHT; row++) {
 		grid[GRID_WIDTH][row] = ' ';
 	}
@@ -226,6 +239,7 @@ void initialise_grid(Grid grid) {
 	}
 }
 
+// Calculate catchment cells, and assign tree labels to relevant tiles
 void calculate_grid(Grid grid, Forest forest, int num_trees) {
 	int row, col;
 	double x, y, x_cent, y_cent;
@@ -245,14 +259,15 @@ void calculate_grid(Grid grid, Forest forest, int num_trees) {
 	}
 }
 
+// Calculate the tree with catchment for a particular cell, if one exists
 char cell_tree(double x_cent, double y_cent, Forest forest, int num_trees) {
 	double min_dist, dist_to_tree;
 	char cell_label = ' ';
 	Tree *tree = NULL, *cell_tree = NULL;
 
-	// Search forest for closest tree with catchment over cell
 	// Default distance is max distance possible within grid
 	min_dist = distance(0, 0, GRID_WIDTH, REGION_HEIGHT);
+	// Search forest for closest tree with catchment over cell
 	for (tree = forest; tree < forest + num_trees; tree++) {
 		dist_to_tree = distance(x_cent, y_cent, tree->xloc, tree->yloc);
 
@@ -271,6 +286,7 @@ char cell_tree(double x_cent, double y_cent, Forest forest, int num_trees) {
 		return cell_label;
 	}
 
+// Print the contents of a grid, along with its axes
 void print_grid(Grid grid, int stage) {
 		int row, col;
 
@@ -316,7 +332,9 @@ void print_xaxis(int stage) {
 		}
 }
 
-// Output functions
+/*=============================================================================
+Output functions*/
+
 void stage1_output(Forest forest, int num_trees, int total_water) {
 	double megalitres = (double) (total_water) / MEGA;
 	printf("\n");
@@ -353,8 +371,6 @@ void stage4_output(Grid grid, Forest forest, int num_trees, double rainfall) {
 	Tree* tree = NULL, *dead_tree = NULL;
 
 	printf("S4: rainfall amount = %.1f\n", rainfall);
-	// remove && rainfall - rainfall CAN be zero
-	//
 	while (tree_has_died && rainfall) {
 		// Set default conditions
 		tree_has_died = FALSE;
